@@ -1,6 +1,7 @@
 <?php
 namespace Database\Seeders;
 
+use App\Models\Permission;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
@@ -22,7 +23,10 @@ class RoleTableSeeder extends Seeder
         ];
 
         foreach ($roles as $role) {
-             Role::create(['name' => $role, 'guard_name' => 'web']);
+             $role = Role::create(['name' => $role, 'guard_name' => 'web']);
+             if($role->name === 'admin') {
+                 $role->syncPermissions(Permission::all());
+             }
         }
     }
 }
