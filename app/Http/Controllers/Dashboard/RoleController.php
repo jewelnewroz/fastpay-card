@@ -3,12 +3,21 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Services\RoleService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    public function index()
+    public function __construct(RoleService $roleService)
     {
+        $this->roleService = $roleService;
+    }
+    public function index(Request $request)
+    {
+        if($request->wantsJson()) {
+            return $this->roleService->getDatatable($request);
+        }
         return view('admin.role.index')->with(['title' => 'Roles']);
     }
 

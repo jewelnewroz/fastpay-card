@@ -35,23 +35,11 @@
 @endsection
 
 @section('header')
-    <style type="text/css">
-        .sidebar-title {
-            margin: 0;
-        }
 
-        hr {
-            margin: 10px 0;
-        }
-    </style>
 @endsection
 
 @section('footer')
-    <script type="text/javascript"
-            src="{{ asset('admin/assets/plugins/dataTable/DataTables-1.10.18/js/jquery.dataTables.min.js') }}"></script>
-    <script type="text/javascript"
-            src="{{ asset('admin/assets/plugins/dataTable/DataTables-1.10.18/js/dataTables.bootstrap.min.js') }}"></script>
-    <script type="text/javascript">
+    <script>
         var url = "{{ route('role.index') }}";
         //
         // Pipelining function for DataTables. To be used to the `ajax` option of DataTables
@@ -106,7 +94,7 @@
                     ,
                     {
                         "mRender": function (data, type, row) {
-                            return "<a href='/dashboard/role/edit/" + row['id'] + "' class='btn btn-secondary btn-xs'><i class='fa fa-edit'></i></a> <a href='/dashboard/role/show/" + row['id'] + "' class='btn btn-success btn-xs'><i class='fa fa-eye'></i></a>";
+                            return "<a href='/dashboard/manage/role/" + row['id'] + "/edit' class='btn btn-secondary btn-xs'><i class='fa fa-edit'></i></a> <a href='/dashboard/manage/role/" + row['id'] + "' class='btn btn-success btn-xs'><i class='fa fa-eye'></i></a>";
                         }
                     }
                 ],
@@ -136,33 +124,6 @@
                 }
             });
 
-            // $('#myModal').modal('show');
-
-            function deleteLibraryItem(id) {
-                var parent = $(this).parents('tr');
-                var url = "{{ url('dashboard/library/delete/') }}/" + id;
-                var data = null;
-                var confirmed = confirm('Are you sure to delete this item?');
-                if (confirmed) {
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    $.ajax({
-                        type: "DELETE",
-                        url: url,
-                        data: data,
-                        success: function (data, textStatus, xhr) {
-                            if (data.success == true) {
-                                $(parent).remove();
-                            }
-                            return false;
-                        }
-                    });
-                }
-                return false;
-            }
         });
     </script>
 @endsection

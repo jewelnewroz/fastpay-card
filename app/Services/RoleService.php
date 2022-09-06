@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Models\User;
 use App\Repositories\Interfaces\RoleRepositoryInterface;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
@@ -19,5 +21,11 @@ class RoleService
         return Cache::rememberForever('roles', function () {
             return $this->roleRepository->all();
         });
+    }
+
+    public function getDatatable($request): JsonResponse
+    {
+        return DataTables()->eloquent($this->roleRepository->with('permissions'))
+            ->toJson();;
     }
 }
