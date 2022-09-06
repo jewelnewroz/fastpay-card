@@ -2,7 +2,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('dashboard') }}" class="brand-link">
-        <img src="{{ asset('assets/img/logo-demo.png') }}" title="{{ config('') }}" class="brand-image" style="opacity: .8">
+        <img src="{{ asset('assets/img/logo-white.png') }}" title="{{ config('') }}" class="brand-image" style="opacity: .8">
     </a>
 
     <!-- Sidebar -->

@@ -1,6 +1,6 @@
-.layout-navbar-fixed .wrapper .sidebar-dark-primary .brand-link:not([class*="navbar"]) {
-    background-color: #fff;
-}
+/*.layout-navbar-fixed .wrapper .sidebar-dark-primary .brand-link:not([class*="navbar"]) {*/
+/*    background-color: #fff;*/
+/*}*/
 .brand-link {
     padding: 5px .5rem;
 }

@@ -28,12 +28,17 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <h1 class="m-0">{{ $title ?? '' }}</h1>
                     </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        @yield('actionBar')
-                    </div><!-- /.col -->
+                    <div class="col-sm-7" id="actionToolBar">
+                        @yield('actionToolBar')
+                        @if($current_route_name != 'dashboard')
+                            <button class="btn btn-default float-right" onclick="history.back()"><i
+                                    class="fa fa-arrow-alt-circle-left"></i> Back
+                            </button>
+                        @endif
+                    </div>
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>

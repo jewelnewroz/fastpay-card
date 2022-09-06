@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\OptionController;
 use App\Http\Controllers\Dashboard\UserController;

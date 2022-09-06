@@ -21,7 +21,7 @@ class ViewServiceProvider extends ServiceProvider
     public function register()
     {
         View::composer(
-            'layouts.elements.sidebar', PathComposer::class
+            '*', PathComposer::class
         );
         View::composer(
             'admin.user.index', RoleComposer::class
