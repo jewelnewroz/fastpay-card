@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Services\RoleService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
