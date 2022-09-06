@@ -45,73 +45,10 @@
 @endsection
 
 @section('header')
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset('admin/assets/plugins/dataTable/DataTables-1.10.18/css/dataTables.bootstrap.min.css') }}"/>
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset('admin/assets/plugins/dataTable/Buttons-1.5.6/css/buttons.bootstrap4.min.css') }}"/>
-    <style type="text/css">
-        /*search box css start here*/
-        .list-search-btn {
-            font-size: 23px;
-        }
 
-        .table-avatar {
-            max-width: 50px;
-        }
-
-        .search-sec {
-            padding: 2rem;
-        }
-
-        .search-slt {
-            display: block;
-            width: 100%;
-            font-size: 1.5rem;
-            line-height: 1.5;
-            color: #55595c;
-            background-color: #fff;
-            background-image: none;
-            border: 1px solid #ccc;
-            height: calc(3rem + 2px) !important;
-            border-radius: 0;
-        }
-
-        .wrn-btn {
-            width: 100%;
-            font-size: 16px;
-            font-weight: 400;
-            text-transform: capitalize;
-            height: calc(3rem + 2px) !important;
-            border-radius: 0;
-        }
-
-        @media (min-width: 992px) {
-            .search-sec {
-                position: relative;
-                top: -114px;
-                background: rgba(26, 70, 104, 0.51);
-            }
-        }
-
-        @media (max-width: 992px) {
-            .search-sec {
-                background: #1A4668;
-            }
-        }
-
-    </style>
 @endsection
 
 @section('footer')
-    <script src="{{ asset('admin/assets/plugins/dataTable/DataTables-1.10.18/js/jquery.dataTables.min.js') }}"></script>
-    <script
-        src="{{ asset('admin/assets/plugins/dataTable/DataTables-1.10.18/js/dataTables.bootstrap.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/plugins/dataTable/Buttons-1.5.6/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/plugins/dataTable/Buttons-1.5.6/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/plugins/dataTable/pdfmake-0.10.18/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/plugins/dataTable/pdfmake-0.10.18/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('admin/assets/plugins/dataTable/Buttons-1.5.6/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/plugins/dataTable/Buttons-1.5.6/js/buttons.print.min.js') }}"></script>
     <script>
         $(document).ready(function () {
             $("#PopS").popover({
@@ -170,8 +107,8 @@
                     {
                         "mRender": function (data, type, row) {
                             let str = "<div class='btn-group'> <button class='btn btn-secondary btn-sm dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fa fa-ellipsis-h' aria-hidden='true'></i></button> <div class='dropdown-menu dropdown-menu-right'> ";
-                            str += "<a href='/dashboard/user/show/" + row['id'] + "' class='dropdown-item'><i class='fa fa-eye'></i> View</a> ";
-                            str += "<a href='/dashboard/user/edit/" + row['id'] + "' class='dropdown-item'><i class='fa fa-edit'></i> Edit</a> ";
+                            str += "<a href='/dashboard/manage/user/" + row['id'] + "' class='dropdown-item'><i class='fa fa-eye'></i> View</a> ";
+                            str += "<a href='/dashboard/manage/user/" + row['id'] + "/edit' class='dropdown-item'><i class='fa fa-edit'></i> Edit</a> ";
                             if (row['status'] != 'Active') {
                                 str += "<a href='#' class='dropdown-item user-action' data-action='active' data-user-id='" + row['id'] + "'><i class='fa fa-check'></i> Active</a> ";
                             } else {
@@ -184,9 +121,9 @@
                     }
                 ],
                 "columnDefs": [
-                    {"targets": [0, 1, 5], "searchable": false, "orderable": false, "visible": true}
+                    {"targets": [6], "searchable": false, "orderable": false, "visible": true}
                 ],
-                "order": [[2, 'asc']],
+                "order": [[5, 'desc']],
                 buttons: [
                     'copy', 'excel', 'pdf', 'print'
                 ]
