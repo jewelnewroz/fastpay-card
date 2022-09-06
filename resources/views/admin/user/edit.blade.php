@@ -198,8 +198,8 @@
                                       <label>Department</label>
                                       <select class="form-control" name="department_id" @if($errors->has('department_id')) is-invalid @endif" >
                                         <option value="">Select</option>
-                                        @foreach( $departments as $k => $v )
-                                        <option value="{{ $k }}" {{ ( !empty( $user->employee ) && ( $k == $user->employee['department_id'] ) ) ? 'selected' : old('department_id') }}>{{ $v }}</option>
+                                        @foreach( $departments as $department )
+                                        <option value="{{ $department->id }}" @if(old('department_id', $user->department_id) === $department-> id) selected @endif>{{ $department->name }}</option>
                                         @endforeach
                                       </select>
                                       @if($errors->has('department_id'))
@@ -214,8 +214,8 @@
                                       <label>Designation</label>
                                       <select class="form-control" name="designation_id" @if($errors->has('designation_id')) is-invalid @endif" >
                                         <option value="">Select</option>
-                                        @foreach( $designations as $k => $v )
-                                        <option value="{{ $k }}" {{ ( !empty( $user->employee ) && ( $k == $user->employee['designation_id'] ) ) ? 'selected' : old('designation_id') }}>{{ $v }}</option>
+                                        @foreach( $designations as $designation )
+                                        <option value="{{ $designation->id }}" @if(old('designation_id', $user->designation_id) === $designation->id) selected @endif>{{ $designation->name }}</option>
                                         @endforeach
                                       </select>
                                       @if($errors->has('designation_id'))

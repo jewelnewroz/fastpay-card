@@ -151,8 +151,8 @@
                                       <label>Designation</label>
                                       <select class="form-control" name="designation_id" @if($errors->has('designation_id')) is-invalid @endif" >
                                         <option value="">Select</option>
-                                        @foreach( $designations as $k => $v )
-                                        <option value="{{ $k }}">{{ $v }}</option>
+                                        @foreach( $designations as $designation )
+                                        <option value="{{ $designation->id }}">{{ $designation->name }} {{ $designation->short_form }}</option>
                                         @endforeach
                                       </select>
                                       @if($errors->has('designation_id'))

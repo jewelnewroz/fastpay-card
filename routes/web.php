@@ -25,6 +25,11 @@ Route::group(['prefix' => 'dashboard'], function() {
 
     Route::group(['prefix' => 'manage'], function() {
         Route::resource('role', RoleController::class);
+
+        Route::group(['prefix' => 'user'], function() {
+            Route::get('import', [UserController::class, 'import'])->name('user.import');
+            Route::get('export', [UserController::class, 'export'])->name('user.export');
+        });
         Route::resource('user', UserController::class);
         Route::resource('option', OptionController::class)->only(['index', 'store']);
     });

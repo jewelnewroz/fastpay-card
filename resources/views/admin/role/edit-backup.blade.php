@@ -35,7 +35,7 @@
 @endif
 
 
-<form action="{{ route('roles.update', $role->id) }}" method="POST">
+<form action="{{ route('role.update', $role->id) }}" method="POST">
     @csrf
     {{ method_field('PUT') }}
 <div class="row">

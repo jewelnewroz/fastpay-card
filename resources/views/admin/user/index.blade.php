@@ -4,17 +4,12 @@
 
     <article class="content items-list-page">
         <div class="card items">
-
             <div class="col-sm-12">
                 <div class="clearfix"></div>
                 <div class="box" style="padding:15px 0;">
                     <table class="table table-striped table-bordered" id="dataTable">
                         <thead>
                         <tr>
-                            <th style="width:30px;"><input type="checkbox" name="" value="1" class="form-control"></th>
-                            <th style="width:50px;">
-                                <div><i class="fa fa-image"></i></div>
-                            </th>
                             <th>
                                 <div>Name</div>
                             </th>
@@ -29,6 +24,9 @@
                             </th>
                             <th>
                                 <div>Status</div>
+                            </th>
+                            <th>
+                                <div>Created at</div>
                             </th>
                             <th style="width:40px;v-align:middle;text-align:center;" class="align-middle">
                                 <div><i class="fa fa-wrench"></i></div>
@@ -115,29 +113,6 @@
     <script src="{{ asset('admin/assets/plugins/dataTable/Buttons-1.5.6/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('admin/assets/plugins/dataTable/Buttons-1.5.6/js/buttons.print.min.js') }}"></script>
     <script>
-        // <div id="popover-content">
-        // <form role="form" method="post">
-        //     <div class="form-group">
-        //         <label>Start time?</label>
-        //         <div class="input-group date" id="datetimepicker1">
-        //             <input type="text" class="form-control" placeholder="Start Date time of event" /> <span class="input-group-addon">
-        //                 <span class="glyphicon glyphicon-calendar"></span>
-        // </span>
-        //         </div>
-        //     </div>
-        //     <div class="form-group">
-        //         <label>End time?</label>
-        //         <div class="input-group date" id="datetimepicker2">
-        //             <input type="text" class="form-control" placeholder="End Date time" /> <span class="input-group-addon">
-        //                 <span class="glyphicon glyphicon-calendar"></span>
-        // </span>
-        //         </div>
-        //     </div>
-        //     <div class="form-group">
-        //         <button class="btn btn-primary btn-block">Search between dates</button>
-        //     </div>
-        // </form>
-        // </div>
         $(document).ready(function () {
             $("#PopS").popover({
                 html: true
@@ -147,118 +122,7 @@
             });
         });
         let url = "{{ route('user.index') }}";
-        //
-        // Pipelining function for DataTables. To be used to the `ajax` option of DataTables
-        //
         $.fn.dataTable.ext.classes.sPageButton = 'page-item';
-        $.fn.dataTable.pipeline = function (opts) {
-            // Configuration options
-            var conf = $.extend({
-                pages: 5,     // number of pages to cache
-                url: "{{ route('user.index') }}",      // script url
-                data: null,   // function or object with parameters to send to the server
-                              // matching how `ajax.data` works in DataTables
-                method: 'GET' // Ajax HTTP method
-            }, opts);
-
-            // Private variables for storing the cache
-            var cacheLower = -1;
-            var cacheUpper = null;
-            var cacheLastRequest = null;
-            var cacheLastJson = null;
-
-            return function (request, drawCallback, settings) {
-                var ajax = true;
-                var requestStart = request.start;
-                var drawStart = request.start;
-                var requestLength = request.length;
-                var requestEnd = requestStart + requestLength;
-
-                if (settings.clearCache) {
-                    // API requested that the cache be cleared
-                    ajax = true;
-                    settings.clearCache = false;
-                } else if (cacheLower < 0 || requestStart < cacheLower || requestEnd > cacheUpper) {
-                    // outside cached data - need to make a request
-                    ajax = true;
-                } else if (JSON.stringify(request.order) !== JSON.stringify(cacheLastRequest.order) ||
-                    JSON.stringify(request.columns) !== JSON.stringify(cacheLastRequest.columns) ||
-                    JSON.stringify(request.search) !== JSON.stringify(cacheLastRequest.search)
-                ) {
-                    // properties changed (ordering, columns, searching)
-                    ajax = true;
-                }
-
-                // Store the request for checking next time around
-                cacheLastRequest = $.extend(true, {}, request);
-
-                if (ajax) {
-                    // Need data from the server
-                    if (requestStart < cacheLower) {
-                        requestStart = requestStart - (requestLength * (conf.pages - 1));
-
-                        if (requestStart < 0) {
-                            requestStart = 0;
-                        }
-                    }
-
-                    cacheLower = requestStart;
-                    cacheUpper = requestStart + (requestLength * conf.pages);
-
-                    request.start = requestStart;
-                    request.length = requestLength * conf.pages;
-
-                    // Provide the same `data` options as DataTables.
-                    if (typeof conf.data === 'function') {
-                        // As a function it is executed with the data object as an arg
-                        // for manipulation. If an object is returned, it is used as the
-                        // data object to submit
-                        var d = conf.data(request);
-                        if (d) {
-                            $.extend(request, d);
-                        }
-                    } else if ($.isPlainObject(conf.data)) {
-                        // As an object, the data given extends the default
-                        $.extend(request, conf.data);
-                    }
-
-                    settings.jqXHR = $.ajax({
-                        "type": conf.method,
-                        "url": conf.url,
-                        "data": request,
-                        "dataType": "json",
-                        "cache": true,
-                        "success": function (json) {
-                            cacheLastJson = $.extend(true, {}, json);
-
-                            if (cacheLower != drawStart) {
-                                json.data.splice(0, drawStart - cacheLower);
-                            }
-                            if (requestLength >= -1) {
-                                json.data.splice(requestLength, json.data.length);
-                            }
-
-                            drawCallback(json);
-                        }
-                    });
-                } else {
-                    json = $.extend(true, {}, cacheLastJson);
-                    json.draw = request.draw; // Update the echo for each response
-                    json.data.splice(0, requestStart - cacheLower);
-                    json.data.splice(requestLength, json.data.length);
-
-                    drawCallback(json);
-                }
-            }
-        };
-
-        // Register an API method that will empty the pipelined data, forcing an Ajax
-        // fetch on the next draw (i.e. `table.clearPipeline().draw()`)
-        $.fn.dataTable.Api.register('clearPipeline()', function () {
-            return this.iterator('table', function (settings) {
-                settings.clearCache = true;
-            });
-        });
 
         $(function () {
             var customFilter = $('#customFilters');
@@ -297,21 +161,12 @@
                 "bInfo": true,
                 "searching": false,
                 "columns": [
-                    {
-                        "mRender": function (data, type, row) {
-                            return '<input type="checkbox" value="' + row['id'] + '" class="form-control table-checkbox">';
-                        }
-                    },
-                    {
-                        "mRender": function (data, type, row) {
-                            return '<img src="' + row['photo'] + '" class="table-avatar">';
-                        }
-                    },
                     {"data": "name"},
                     {"data": "email"},
                     {"data": "mobile"},
                     {"data": "role"},
                     {"data": "status"},
+                    {"data": "created_at"},
                     {
                         "mRender": function (data, type, row) {
                             let str = "<div class='btn-group'> <button class='btn btn-secondary btn-sm dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fa fa-ellipsis-h' aria-hidden='true'></i></button> <div class='dropdown-menu dropdown-menu-right'> ";
@@ -329,7 +184,7 @@
                     }
                 ],
                 "columnDefs": [
-                    {"targets": [0, 1, 5, 6, 7], "searchable": false, "orderable": false, "visible": true}
+                    {"targets": [0, 1, 5], "searchable": false, "orderable": false, "visible": true}
                 ],
                 "order": [[2, 'asc']],
                 buttons: [

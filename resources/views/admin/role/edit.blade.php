@@ -7,9 +7,9 @@
                         <div class="title-block">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h3 class="title"> {{ $title }} <a href="{{ route('roles.create')}}" class="btn btn-primary btn-sm rounded-s"> Add New </a>
+                                    <h3 class="title"> {{ $title }} <a href="{{ route('role.create')}}" class="btn btn-primary btn-sm rounded-s"> Add New </a>
                                     </h3>
-                                    <!-- <p class="title-description"> List of <a href="{{ route('user.index') }}">Active</a>, <a href="{{ route('user.index') }}">Pending</a>, <a href="{{ route('user.index') }}">Disabled</a> Customers</p> -->
+                                    <!-- <p class="title-description"> List of <a href="{{ route('customer.index') }}">Active</a>, <a href="{{ route('customer.index') }}">Pending</a>, <a href="{{ route('customer.index') }}">Disabled</a> Customers</p> -->
                                 </div>
                             </div>
                         </div>
@@ -22,7 +22,7 @@
                     <div class="col-sm-12">
                         <div class="clearfix"></div>
                         <div class="box" style="padding:15px 0;">
-                            <form action="{{ route('roles.update', $role->id) }}" method="POST">
+                            <form action="{{ route('role.update', $role->id) }}" method="POST">
                                 @csrf
                                 {{ method_field('PUT') }}
                                 <div class="form-group">
