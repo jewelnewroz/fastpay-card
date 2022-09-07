@@ -3,25 +3,6 @@
 @section('content')
 
                 <article class="content items-list-page">
-                    <div class="title-search-block">
-                        <div class="title-block">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h3 class="title"><i class="fa fa-user-plus"></i> {{ $title }}
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="items-search" id="customFilters">
-                            <form class="form-inline">
-                                <div class="input-group">
-                                    <a href="{{ route('user.index') }}" class="btn btn-secondary rounded-s list-search-btn" id="search">
-                                        <i class="fa fa-arrow-left"></i> Back
-                                    </a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
                     <form name="item" id="customerForm" action="{{ route('user.store')}}" method="POST">
                       @csrf
                       <div class="accordion" id="accordionExample">
@@ -41,22 +22,6 @@
                             <div class="card-body" style="border:1px solid #eee;">
                               <div class="row">
                                   <div class="col-sm-6">
-                                    <div class="form-group">
-                                      <label for="branch_id">Branch</label>
-                                      <select class="form-control @if($errors->has('branch_id')) is-invalid @endif" name="branch_id" id="branch_id" required>
-                                        @if( $branches->count() > 1 )
-                                        <option value="">Select branch</option>
-                                        @endif
-                                        @foreach( $branches as $branch )
-                                        <option value="{{ $branch->id }}" @if(old('branch_id') == $branch->id) selected @endif>{{ $branch->name }}</option>
-                                        @endforeach
-                                      </select>
-                                      @if($errors->has('branch_id'))
-                                      <div class="invalid-feedback" style="display:block;">
-                                        {{ $errors->first('branch_id') }}
-                                      </div>
-                                      @endif
-                                    </div>
                                     <div class="form-group">
                                       <label>Name</label>
                                       <input type="text" id="firstName" name="name" class="form-control @if($errors->has('name')) is-invalid @endif" value="{{ old('name') }}" placeholder="First name">
@@ -142,22 +107,6 @@
                                       @if($errors->has('role'))
                                       <div class="invalid-feedback" style="display:block;">
                                         {{ $errors->first('role') }}
-                                      </div>
-                                      @endif
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                    <div class="form-group">
-                                      <label>Designation</label>
-                                      <select class="form-control" name="designation_id" @if($errors->has('designation_id')) is-invalid @endif" >
-                                        <option value="">Select</option>
-                                        @foreach( $designations as $designation )
-                                        <option value="{{ $designation->id }}">{{ $designation->name }} {{ $designation->short_form }}</option>
-                                        @endforeach
-                                      </select>
-                                      @if($errors->has('designation_id'))
-                                      <div class="invalid-feedback" style="display:block;">
-                                        {{ $errors->first('designation_id') }}
                                       </div>
                                       @endif
                                     </div>

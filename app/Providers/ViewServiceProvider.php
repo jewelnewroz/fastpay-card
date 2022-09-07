@@ -25,7 +25,11 @@ class ViewServiceProvider extends ServiceProvider
             '*', PathComposer::class
         );
         View::composer(
-            'admin.user.index', RoleComposer::class
+            [
+                'admin.user.index',
+                'admin.user.create',
+                'admin.user.edit'
+            ], RoleComposer::class
         );
         View::composer(
             ['admin.role.edit', 'admin.role.create'], PermissionComposer::class

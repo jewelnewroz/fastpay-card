@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'index']);
 
-Route::group(['prefix' => 'dashboard'], function() {
+Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::group(['prefix' => 'manage'], function() {

@@ -2,7 +2,8 @@
 
 namespace App\Services;
 
-use App\Http\Requests\Dashboard\User\UserCreateRequest;
+use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Http\JsonResponse;
@@ -39,7 +40,16 @@ class UserService
 
     public function create(UserCreateRequest $request)
     {
-        return $this->userRepository->create($request->validated()
-        );
+        return $this->userRepository->create($request->validated());
+    }
+
+    public function update(UserUpdateRequest $request, $id)
+    {
+        return $this->userRepository->update($request->validated(), $id);
+    }
+
+    public function delete($id)
+    {
+        return $this->userRepository->delete($id);
     }
 }
