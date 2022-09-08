@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
+@section('actionToolBar')
+    <a href="{{ route('user.create') }}" class="btn btn-primary float-right ml-2"><i class="fa fa-plus"></i> Add new</a>
+@endsection
+
 @section('content')
 
     <article class="content items-list-page">
-        <div class="card items">
+        <div class="card items p-2">
             <div class="col-sm-12">
                 <div class="clearfix"></div>
                 <div class="box" style="padding:15px 0;">
@@ -106,7 +110,7 @@
                     {"data": "created_at"},
                     {
                         "mRender": function (data, type, row) {
-                            let str = "<div class='btn-group'> <button class='btn btn-secondary btn-sm dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fa fa-ellipsis-h' aria-hidden='true'></i></button> <div class='dropdown-menu dropdown-menu-right'> ";
+                            let str = "<div class='btn-group'> <button class='btn btn-default btn-sm dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fa fa-ellipsis-h' aria-hidden='true'></i></button> <div class='dropdown-menu dropdown-menu-right'> ";
                             str += "<a href='/dashboard/manage/user/" + row['id'] + "' class='dropdown-item'><i class='fa fa-eye'></i> View</a> ";
                             str += "<a href='/dashboard/manage/user/" + row['id'] + "/edit' class='dropdown-item'><i class='fa fa-edit'></i> Edit</a> ";
                             if (row['status'] != 'Active') {
