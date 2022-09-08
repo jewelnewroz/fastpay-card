@@ -45,6 +45,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public $observables = [
+        'updated'
+    ];
+
     public function getNiceStatusAttribute()
     {
         return config('common.user.statuses')[$this->status];

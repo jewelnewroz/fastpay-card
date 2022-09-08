@@ -33,7 +33,7 @@
                                 <div>Created at</div>
                             </th>
                             <th style="width:40px;v-align:middle;text-align:center;" class="align-middle">
-                                <div><i class="fa fa-wrench"></i></div>
+                                <div>Action</div>
                             </th>
                         </tr>
                         </thead>
@@ -128,9 +128,7 @@
                     {"targets": [6], "searchable": false, "orderable": false, "visible": true}
                 ],
                 "order": [[5, 'desc']],
-                buttons: [
-                    'copy', 'excel', 'pdf', 'print'
-                ]
+                buttons: {!! json_encode(\App\Helper\CommonHelper::dataTableButtons(['copy', 'pdf','print', 'visibility'])) !!},
             });
 
             //Click on Search Button
