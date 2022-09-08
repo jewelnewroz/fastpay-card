@@ -120,9 +120,9 @@
                                         <select class="form-control" name="role"
                                                 @if($errors->has('role')) is-invalid @endif" >
                                         <option value="">Select</option>
-                                        @foreach( $roles as $k => $v )
+                                        @foreach( $roles as $role )
                                             <option
-                                                value="{{ $k }}" {{ ( $user->hasrole( $k ) ) ? 'selected' : '' }}>{{ $v }}</option>
+                                                value="{{ $role->id }}" {{ ( $user->hasrole( $role->name ) ) ? 'selected' : '' }}>{{ $role->name }}</option>
                                             @endforeach
                                             </select>
                                             @if($errors->has('role'))

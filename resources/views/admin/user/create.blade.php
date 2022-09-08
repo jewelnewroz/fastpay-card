@@ -100,8 +100,8 @@
                                       <label>Role</label>
                                       <select class="form-control" name="role" @if($errors->has('role')) is-invalid @endif" >
                                         <option value="">Select</option>
-                                        @foreach( $roles as $k => $v )
-                                        <option value="{{ $k }}" @if(old('orle') == $k ) selected @endif>{{ $v }}</option>
+                                        @foreach( $roles as $role )
+                                        <option value="{{ $role->id }}" @if(old('role') == $role->id ) selected @endif>{{ $role->name }}</option>
                                         @endforeach
                                       </select>
                                       @if($errors->has('role'))

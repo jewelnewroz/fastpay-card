@@ -3,9 +3,14 @@
 namespace App\Observers;
 
 use App\Models\Role;
+use Illuminate\Support\Facades\Cache;
 
 class RoleObserver
 {
+    public function __construct()
+    {
+        Cache::forget('roles');
+    }
     public function created(Role $role)
     {
         $role->syncPermissions(request()->input('permission'));
@@ -13,7 +18,6 @@ class RoleObserver
 
     public function updated(Role $role)
     {
-        dd($role);
         $role->syncPermissions(request()->input('permission'));
     }
 

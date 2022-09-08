@@ -20,13 +20,13 @@ class UserService
     public function getDatatable($request): JsonResponse
     {
         return DataTables()->eloquent($this->userRepository->with('roles'))
-            ->addColumn('role', function(User $user) {
+            ->addColumn('role', function (User $user) {
                 return $user->roles->first()->name ?? '';
             })
-            ->addColumn('created_at', function(User $user) {
+            ->addColumn('created_at', function (User $user) {
                 return $user->created_at->format('d/m/Y h:i a');
             })
-            ->addColumn('status', function(User $user) {
+            ->addColumn('status', function (User $user) {
                 return $user->nice_status;
             })
             ->removeColumn('roles')
@@ -38,9 +38,10 @@ class UserService
         return $this->userRepository->getModel()->where('email', '=', $email)->where('id', '!=', $userId)->count() > 0;
     }
 
-    public function create(UserCreateRequest $request)
+    public function create(UserCreateRequest $request): bool
     {
         return $this->userRepository->create($request->validated());
+
     }
 
     public function update(UserUpdateRequest $request, $id)
