@@ -16,8 +16,8 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name' => 'bail|required|string',
-            'email' => 'bail|required|email|unique:users,email,' . $this->id,
-            'mobile' => ['bail', 'required', 'string', 'unique:users,mobile,' . $this->id, new BDMobile()]
+            'email' => 'bail|required|email|unique:users,email,' . $this->user,
+            'mobile' => ['bail', 'required', 'string', 'unique:users,mobile,' . $this->user, new BDMobile()]
         ];
     }
 }
