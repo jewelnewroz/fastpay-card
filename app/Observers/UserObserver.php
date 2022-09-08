@@ -14,7 +14,6 @@ class UserObserver
 
     public function updated(User $user)
     {
-        $user->removeRole(Role::all());
-        $user->assignRole(request()->input('role'));
+
     }
 }
