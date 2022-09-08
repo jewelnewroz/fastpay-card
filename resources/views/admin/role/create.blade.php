@@ -22,7 +22,7 @@
 
                                     <div class="box-part">
                                         <div class="title">
-                                            <h4><input type="checkbox" id="{{ $key }}" class="checkedAll"> {{ ucfirst( $key ) }}</h4>
+                                            <h4><label><input type="checkbox" id="{{ $key }}" class="checkedAll"> {{ ucfirst( $key ) }}</label></h4>
                                         </div>
 
                                         <div class="text">

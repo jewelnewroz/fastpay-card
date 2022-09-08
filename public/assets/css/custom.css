@@ -73,7 +73,7 @@
 .dataTables_length {
     width: auto;
     float: left;
-    padding: 20px 0;
+    padding: 0;
 }
 
 .dataTables_paginate {
@@ -84,6 +84,8 @@
 .dataTables_info {
     max-width: 240px !important;
     float: left;
+    background: #dfdfdf;
+    padding: 0 15px 10px;
 }
 
 .table-avatar {

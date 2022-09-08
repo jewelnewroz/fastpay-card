@@ -21,8 +21,7 @@
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 box-item" id="permissionParent">
                                     <div class="box-part">
                                         <div class="title">
-                                            <h4><input type="checkbox" class="checkedAll"
-                                                       id="{{ $key }}"> {{ ucfirst( $key ) }}</h4>
+                                            <h4><label><input type="checkbox" class="checkedAll" id="{{ $key }}"> {{ ucfirst( $key ) }}</label></h4>
                                         </div>
                                         <div class="text">
                                             @foreach( $lists as $list )

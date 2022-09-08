@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('actionToolBar')
+    <a href="{{ route('role.create') }}" class="btn btn-primary float-right ml-2"><i class="fa fa-plus"></i> Add new</a>
+@endsection
+
 @section('content')
     <article class="content items-list-page">
         <div class="card items" style="padding: 15px">
@@ -68,12 +72,12 @@
                     }
                 },
                 dom: 'lBfrtip',
-                "lengthChange": false,
-                lengthMenu: [[25, 50, 100, 500, -1], [25, 50, 100, 500, "All"]],
+                "lengthChange": true,
+                lengthMenu: [[15, 25, 50, 100, 500, -1], [15, 25, 50, 100, 500, "All"]],
                 "oLanguage": {
                     "sLengthMenu": "Show _MENU_ ",
                 },
-                "pageLength": 25,
+                "pageLength": 15,
                 "bFilter": false,
                 "bInfo": true,
                 "searching": false,
@@ -94,14 +98,15 @@
                     ,
                     {
                         "mRender": function (data, type, row) {
-                            return "<a href='/dashboard/manage/role/" + row['id'] + "/edit' class='btn btn-secondary btn-xs'><i class='fa fa-edit'></i></a> <a href='/dashboard/manage/role/" + row['id'] + "' class='btn btn-success btn-xs'><i class='fa fa-eye'></i></a>";
+                            return "<a href='/dashboard/manage/role/" + row['id'] + "/edit' class='btn btn-default btn-xs'><i class='fa fa-edit'></i> Edit</a>";
                         }
                     }
                 ],
                 "columnDefs": [
                     {"targets": [2, 3], "searchable": false, "orderable": false, "visible": true}
                 ],
-                "order": [[0, 'asc']]
+                "order": [[0, 'asc']],
+                "buttons": []
             });
 
             //Click on Search Button
