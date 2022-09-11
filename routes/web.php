@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\OperatorController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\OptionController;
@@ -22,6 +23,8 @@ Route::get('/', [FrontendController::class, 'index']);
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::resource('operator', OperatorController::class);
 
     Route::group(['prefix' => 'manage'], function() {
         Route::resource('role', RoleController::class);

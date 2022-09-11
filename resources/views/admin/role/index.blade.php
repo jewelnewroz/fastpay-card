@@ -1,7 +1,16 @@
 @extends('layouts.app')
 
 @section('actionToolBar')
-    <a href="{{ route('role.create') }}" class="btn btn-primary float-right ml-2"><i class="fa fa-plus"></i> Add new</a>
+    <a href="{{ route('role.create') }}" class="btn btn-sm btn-success mr-2"><i class="fa fa-plus"></i> Add new</a>
+@endsection
+
+@section('filterBar')
+    <div class="form-group">
+        <button type="button" class="btn btn-warning" id="filterBtn"><i class="fa fa-search"></i></button>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search" id="keywords">
+    </div>
 @endsection
 
 @section('content')
@@ -50,10 +59,9 @@
         //
         $.fn.dataTable.ext.classes.sPageButton = 'page-item';
         $(function () {
-            var customFilter = $('#customFilters');
+            var customFilter = $('#filterToolBar');
             var keyword = $(customFilter).find('input#keywords');
-            var status = $(customFilter).find('select#status');
-            var search = $(customFilter).find('button#search');
+            var search = $(customFilter).find('button#filterBtn');
             console.log(keyword);
             var table = $('#dataTable').DataTable({
                 "processing": true,
