@@ -1,3 +1,4 @@
+@inject('commonHelper', \App\Helper\CommonHelper::class)
 @extends('layouts.app')
 
 @section('actionToolBar')
@@ -14,7 +15,6 @@
 @endsection
 
 @section('content')
-
     <article class="content items-list-page">
         <div class="card items p-2">
             <div class="col-sm-12">
@@ -105,7 +105,7 @@
                 "columns": [
                     {"data": "name"},
                     {"data": "email"},
-                    {"data": "mobile"},
+                    {"data": "mobile_no"},
                     {"data": "role"},
                     {"data": "status"},
                     {"data": "created_at"},
@@ -129,7 +129,7 @@
                     {"targets": [6], "searchable": false, "orderable": false, "visible": true}
                 ],
                 "order": [[5, 'desc']],
-                buttons: {!! json_encode(\App\Helper\CommonHelper::dataTableButtons(['copy', 'pdf','print', 'visibility'])) !!},
+                buttons: {!! json_encode($commonHelper->dataTableButtons(['copy', 'pdf','print', 'visibility'])) !!},
             });
 
             //Custom Filters ( title search )

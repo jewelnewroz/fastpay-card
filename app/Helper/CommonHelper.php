@@ -2,10 +2,16 @@
 
 namespace App\Helper;
 
+use App\Constant\AppConst;
 use App\Models\User;
 
 class CommonHelper
 {
+    public static function isMobile($string)
+    {
+        return preg_match(AppConst::MOBILE_NUMBER_PATTERN, $string);
+    }
+
     public static function parseTemplate($string, $array)
     {
         foreach ($array as $key => $value) {
