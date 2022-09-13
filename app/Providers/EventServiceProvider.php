@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Bundle;
+use App\Models\Operator;
 use App\Models\Role;
 use App\Models\User;
+use App\Observers\BundleObserver;
+use App\Observers\OperatorObserver;
 use App\Observers\RoleObserver;
 use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
@@ -33,5 +37,7 @@ class EventServiceProvider extends ServiceProvider
     {
         Role::observe(RoleObserver::class);
         User::observe(UserObserver::class);
+        Operator::observe(OperatorObserver::class);
+        Bundle::observe(BundleObserver::class);
     }
 }

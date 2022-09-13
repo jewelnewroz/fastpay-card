@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\Repositories\BundleRepository;
+use App\Repositories\Interfaces\BundleRepositoryInterface;
 use App\Repositories\Interfaces\OperatorRepositoryInterface;
 use App\Repositories\Interfaces\RoleRepositoryInterface;
+use App\Repositories\Interfaces\TransactionRepositoryInterface;
 use App\Repositories\OperatorRepository;
 use App\Repositories\RoleRepository;
+use App\Repositories\TransactionRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\BaseRepository;
 use App\Repositories\Interfaces\BaseRepositoryInterface;
@@ -25,6 +29,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(RoleRepositoryInterface::class, RoleRepository::class);
         $this->app->bind(OperatorRepositoryInterface::class, OperatorRepository::class);
+        $this->app->bind(BundleRepositoryInterface::class, BundleRepository::class);
+        $this->app->bind(TransactionRepositoryInterface::class, TransactionRepository::class);
     }
 
     /**

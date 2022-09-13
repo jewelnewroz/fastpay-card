@@ -10,6 +10,13 @@
         <button type="button" class="btn btn-warning" id="filterBtn"><i class="fa fa-search"></i></button>
     </div>
     <div class="form-group">
+        <select class="form-control" id="status">
+            <option value="">Select status</option>
+            <option value="1">Active</option>
+            <option value="0">Inactive</option>
+        </select>
+    </div>
+    <div class="form-group">
         <input type="text" class="form-control" placeholder="Search" id="keywords">
     </div>
 @endsection

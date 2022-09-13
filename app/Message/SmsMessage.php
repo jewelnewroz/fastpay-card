@@ -1,7 +1,5 @@
 <?php
-
-
-namespace App\Sms;
+namespace App\Message;
 
 use Exception;
 use App\Helper\SmsHelper;
