@@ -132,13 +132,8 @@
                 buttons: {!! json_encode(\App\Helper\CommonHelper::dataTableButtons(['copy', 'pdf','print', 'visibility'])) !!},
             });
 
-            //Click on Search Button
-            $(search).click(function (e) {
-                table.draw();
-            });
-
             //Custom Filters ( title search )
-            $(keyword).keyup(function (event) {
+            $('input').keyup(function (event) {
                 var keycode = (event.keyCode ? event.keyCode : event.which);
                 // if(keycode == '13'){
                 table.draw();
@@ -146,30 +141,15 @@
             });
 
             //Custom Filters ( Author search )
-            $(area).change(function () {
-                // var keycode = (event.keyCode ? event.keyCode : event.which);
+            $('button').click(function () {
                 table.draw();
             });
 
             //Custom Filters ( Author search )
-            $(package).change(function () {
-                // var keycode = (event.keyCode ? event.keyCode : event.which);
+            $('select').change(function () {
                 table.draw();
             });
 
-            //Custom Filters ( Author search )
-            $(role).change(function () {
-                table.draw();
-            });
-
-            //Custom Filters ( Author search )
-            $(status).change(function () {
-                table.draw();
-            });
-
-            // $('#myModal').modal('show');
-
-            // $('#myModal').modal('show');
             $('table').on('click', '.user-action', function (e) {
                 e.defaultPrevented;
                 console.log(this);

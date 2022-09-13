@@ -117,13 +117,8 @@
                 "buttons": []
             });
 
-            //Click on Search Button
-            $(search).click(function (e) {
-                table.draw();
-            });
-
             //Custom Filters ( title search )
-            $(keyword).keyup(function (event) {
+            $('input').keyup(function (event) {
                 var keycode = (event.keyCode ? event.keyCode : event.which);
                 // if(keycode == '13'){
                 table.draw();
@@ -131,10 +126,13 @@
             });
 
             //Custom Filters ( Author search )
-            $(status).change(function () {
-                if ($(this).val() != '') {
-                    table.draw();
-                }
+            $('button').click(function () {
+                table.draw();
+            });
+
+            //Custom Filters ( Author search )
+            $('select').change(function () {
+                table.draw();
             });
 
         });

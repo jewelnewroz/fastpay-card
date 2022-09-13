@@ -19,6 +19,21 @@
 
                 <div class="dropdown-divider"></div>
 
+                <li class="nav-item @if(request()->segment('2') === 'operator') menu-open @endif">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-box"></i>
+                        <p>Operators <i class="right fas fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('operator.index') }}" class="nav-link @if($current_route_name == 'operator.index') active @endif">
+                                <i class="fa fa-list nav-icon"></i>
+                                <p>Operators</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <div class="dropdown-divider"></div>
 
                 <li class="nav-item @if(request()->segment('2') === 'manage') menu-open @endif">
