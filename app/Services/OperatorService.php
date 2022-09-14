@@ -19,11 +19,11 @@ class OperatorService
     {
         return DataTables()->eloquent($this->operatorRepository->getModel()->query())
             ->filter(function ($query) use ($request) {
-                if ($request->has('keyword')) {
-                    $query->where('name', 'like', '%' . $request->input('keyword') . '%');
-                }
                 if ($request->filled('status')) {
                     $query->where('status', '=', $request->input('status'));
+                }
+                if ($request->has('keyword')) {
+                    $query->where('name', 'like', '%' . $request->input('keyword') . '%');
                 }
             })
             ->addColumn('created_at', function (Operator $operator) {
@@ -33,7 +33,7 @@ class OperatorService
                 return $operator->nice_status;
             })
             ->removeColumn('roles')
-            ->toJson();;
+            ->toJson();
     }
 
     public function all()

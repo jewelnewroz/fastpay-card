@@ -24,7 +24,7 @@ class BundleController extends Controller
     public function index(Request $request)
     {
         if($request->ajax() || $request->wantsJson()) {
-            $this->bundleService->getDataTable($request);
+            return $this->bundleService->getDataTable($request);
         }
         return view('admin.bundle.index')->with(['title' => 'Bundles']);
     }
