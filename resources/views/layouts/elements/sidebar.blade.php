@@ -61,6 +61,27 @@
                     </ul>
                 </li>
 
+                <li class="nav-item @if(request()->segment('2') === 'transaction') menu-open @endif">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-funnel-dollar"></i>
+                        <p>Transactions <i class="right fas fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('transaction.index') }}" class="nav-link @if($current_route_name == 'transaction.index') active @endif">
+                                <i class="fa fa-list nav-icon"></i>
+                                <p>Transactions</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('transaction.index') }}" class="nav-link @if($current_route_name == 'transaction.index') active @endif">
+                                <i class="fa fa-list nav-icon"></i>
+                                <p>Reports</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <div class="dropdown-divider"></div>
 
                 <li class="nav-item @if(request()->segment('2') === 'manage') menu-open @endif">

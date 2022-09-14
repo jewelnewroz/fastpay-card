@@ -1,10 +1,6 @@
 @inject('commonHelper', \App\Helper\CommonHelper::class)
 @extends('layouts.app')
 
-@section('actionToolBar')
-    <a href="{{ route('bundle.create') }}" class="btn btn-sm btn-success ml-2"><i class="fa fa-plus"></i> Add new</a>
-@endsection
-
 @section('filterBar')
     <div class="form-group">
         <button type="button" class="btn btn-warning" id="filterBtn"><i class="fa fa-search"></i></button>
@@ -41,10 +37,16 @@
                                 <div>Operator name</div>
                             </th>
                             <th>
-                                <div>Eligible for</div>
+                                <div>Store</div>
                             </th>
                             <th>
-                                <div>Price</div>
+                                <div>Type</div>
+                            </th>
+                            <th>
+                                <div>Position</div>
+                            </th>
+                            <th>
+                                <div>Eligible for</div>
                             </th>
                             <th>
                                 <div>Status</div>
@@ -73,7 +75,7 @@
 
 @section('footer')
     <script>
-        let url = "{{ route('bundle.index') }}";
+        let url = "{{ route('operator.index') }}";
         $.fn.dataTable.ext.classes.sPageButton = 'page-item';
 
         $(function () {
@@ -111,7 +113,9 @@
                         }
                     },
                     {"data": "name"},
-                    {"data": "operator.name"},
+                    {"data": "store"},
+                    {"data": "active_system"},
+                    {"data": "position"},
                     {
                         "mRender": function (data, type, row) {
                             let str = '';
@@ -123,7 +127,6 @@
                             return str;
                         }
                     },
-                    {"data": "price"},
                     {"data": "status"},
                     {"data": "created_at"},
                     {

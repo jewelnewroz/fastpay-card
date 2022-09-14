@@ -19,7 +19,7 @@ class BundleService
 
     public function getDataTable(Request $request): JsonResponse
     {
-        return DataTables()->eloquent($this->bundleRepository->getModel()->query())
+        return DataTables()->eloquent($this->bundleRepository->with('operator'))
             ->filter(function ($query) use ($request) {
                 if ($request->filled('status')) {
                     $query->where('status', '=', $request->input('status'));
@@ -29,7 +29,7 @@ class BundleService
                 }
             })
             ->addColumn('created_at', function (Bundle $bundle) {
-                return $bundle->created_at->format('d/m/Y h:i a');
+                return $bundle->created_at ? $bundle->created_at->format('d/m/Y h:i a') : '---';
             })
             ->addColumn('status', function (Bundle $bundle) {
                 return $bundle->nice_status;

@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\OptionController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\Dashboard\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function() {
 
     Route::resource('operator', OperatorController::class);
     Route::resource('bundle', BundleController::class);
+    Route::resource('transaction', TransactionController::class)->only('index');
 
     Route::group(['prefix' => 'manage'], function() {
         Route::resource('role', RoleController::class);
