@@ -26,9 +26,36 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="{{ route('operator.create') }}" class="nav-link @if($current_route_name == 'operator.create') active @endif">
+                                <i class="fa fa-plus nav-icon"></i>
+                                <p>Add new operator</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('operator.index') }}" class="nav-link @if($current_route_name == 'operator.index') active @endif">
                                 <i class="fa fa-list nav-icon"></i>
                                 <p>Operators</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item @if(request()->segment('2') === 'bundle') menu-open @endif">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-boxes"></i>
+                        <p>Bundles <i class="right fas fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('bundle.create') }}" class="nav-link @if($current_route_name == 'bundle.create') active @endif">
+                                <i class="fa fa-plus nav-icon"></i>
+                                <p>Add new bundle</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('bundle.index') }}" class="nav-link @if($current_route_name == 'bundle.index') active @endif">
+                                <i class="fa fa-list nav-icon"></i>
+                                <p>Bundles</p>
                             </a>
                         </li>
                     </ul>

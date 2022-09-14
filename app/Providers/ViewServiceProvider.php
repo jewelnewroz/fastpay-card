@@ -2,23 +2,15 @@
 
 namespace App\Providers;
 
+use App\Http\View\Composers\OperatorComposer;
 use App\Http\View\Composers\PathComposer;
 use App\Http\View\Composers\PermissionComposer;
 use App\Http\View\Composers\RoleComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use App\Http\View\Composers\BranchComposer;
-use App\Http\View\Composers\DepartmentComposer;
-use App\Http\View\Composers\CurrencyComposer;
-use App\Http\View\Composers\DesignationComposer;
 
 class ViewServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     *
-     * @return void
-     */
     public function register()
     {
         View::composer(
@@ -34,13 +26,13 @@ class ViewServiceProvider extends ServiceProvider
         View::composer(
             ['admin.role.edit', 'admin.role.create'], PermissionComposer::class
         );
+        View::composer([
+            'admin.bundle.index',
+            'admin.bundle.create',
+            'admin.bundle.edit'
+        ], OperatorComposer::class);
     }
 
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
     public function boot()
     {
         //

@@ -35,4 +35,9 @@ class OperatorService
             ->removeColumn('roles')
             ->toJson();;
     }
+
+    public function all()
+    {
+        return $this->operatorRepository->all();
+    }
 }

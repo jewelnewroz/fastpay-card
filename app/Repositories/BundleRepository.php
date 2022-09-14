@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Bundle;
 use App\Repositories\Interfaces\BundleRepositoryInterface;
+use Illuminate\Support\Facades\Cache;
 
 class BundleRepository extends BaseRepository implements BundleRepositoryInterface
 {
@@ -14,6 +15,8 @@ class BundleRepository extends BaseRepository implements BundleRepositoryInterfa
 
     public function all()
     {
-        return parent::all();
+        Cache::rememberForever('operators', function() {
+            return parent::all();
+        });
     }
 }
