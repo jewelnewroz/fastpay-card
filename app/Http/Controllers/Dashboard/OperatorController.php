@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Helper\ResponseHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OperatorCreateRequest;
+use App\Http\Requests\OperatorUpdateRequest;
 use App\Models\Operator;
 use App\Services\OperatorService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class OperatorController extends Controller
 {
@@ -29,9 +34,17 @@ class OperatorController extends Controller
         return view('admin.operator.create')->with(['title' => 'Add new operator']);
     }
 
-    public function store(Request $request)
+    public function store(OperatorCreateRequest $request): RedirectResponse
     {
-        //
+        try {
+            if($this->operatorService->create($request)) {
+                return redirect()->route('operator.index')->with(ResponseHelper::success(__('Operator successfully created')));
+            }
+        } catch (\Exception $exception) {
+            Log::error('User Create ' . $exception);
+        }
+
+        return redirect()->back()->with(ResponseHelper::failed(__('Operator cannot be created')))->withInput($request->all());
     }
 
     public function show(Operator $operator)
@@ -44,9 +57,17 @@ class OperatorController extends Controller
         return view('admin.operator.edit', compact('operator'))->with(['title' => 'Edit operator']);
     }
 
-    public function update(Request $request, $id)
+    public function update(OperatorUpdateRequest $request, $id): RedirectResponse
     {
-        //
+        try {
+            if($this->operatorService->update($request, $id)) {
+                return redirect()->route('operator.index')->with(ResponseHelper::success(__('Operator successfully updated')));
+            }
+        } catch (\Exception $exception) {
+            Log::error('User Create ' . $exception);
+        }
+
+        return redirect()->back()->with(ResponseHelper::failed(__('Operator cannot be updated')))->withInput($request->all());
     }
 
     public function destroy($id)

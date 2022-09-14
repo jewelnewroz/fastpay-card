@@ -107,6 +107,7 @@
                 "bFilter": true,
                 "bInfo": true,
                 "searching": false,
+                saveState: true,
                 "columns": [
                     {
                         "mRender": function (data, type, row) {

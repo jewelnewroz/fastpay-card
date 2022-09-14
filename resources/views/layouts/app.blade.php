@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="{{ asset('adminLte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminLte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminLte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/select2-4.0/dist/css/select2.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('assets/plugins/select2-4.0/dist/css/select2-bootstrap4.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('adminLte/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
@@ -93,6 +96,7 @@
 <script src="{{ asset('adminLte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('adminLte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('adminLte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/select2-4.0/dist/js/select2.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('adminLte/dist/js/adminlte.js') }}"></script>
 
