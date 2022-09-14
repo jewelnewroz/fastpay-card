@@ -32,7 +32,6 @@ class OperatorService
             ->addColumn('status', function (Operator $operator) {
                 return $operator->nice_status;
             })
-            ->removeColumn('roles')
             ->toJson();
     }
 

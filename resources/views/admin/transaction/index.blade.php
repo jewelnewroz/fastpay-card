@@ -75,7 +75,7 @@
 
 @section('footer')
     <script>
-        let url = "{{ route('operator.index') }}";
+        let url = "{{ route('transaction.index') }}";
         $.fn.dataTable.ext.classes.sPageButton = 'page-item';
 
         $(function () {

@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Bundle;
-use App\Models\Operator;
 use App\Repositories\Interfaces\BundleRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -34,7 +33,6 @@ class BundleService
             ->addColumn('status', function (Bundle $bundle) {
                 return $bundle->nice_status;
             })
-            ->removeColumn('roles')
             ->toJson();
     }
 }
