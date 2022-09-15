@@ -4,10 +4,13 @@ namespace App\Http\Requests;
 
 use App\Rules\BDMobile;
 use App\Rules\StrongPasswordRule;
+use App\Traits\FormRequestResponseTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserCreateRequest extends FormRequest
 {
+    use FormRequestResponseTrait;
+
     public function authorize(): bool
     {
         return auth()->check();

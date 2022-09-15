@@ -102,13 +102,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Mobile</label>
-                                        <input type="text" name="mobile"
-                                               class="form-control @if($errors->has('mobile')) is-invalid @endif"
-                                               value="{{ ( !empty( old('mobile') ) ) ? old('mobile') : $user->mobile }}"
+                                        <input type="text" name="mobile_no"
+                                               class="form-control @if($errors->has('mobile_no')) is-invalid @endif"
+                                               value="{{ old('mobile_no', $user->mobile_no) }}"
                                                placeholder="Mobile">
-                                        @if($errors->has('mobile'))
+                                        @if($errors->has('mobile_no'))
                                             <div class="invalid-feedback" style="display:block;">
-                                                {{ $errors->first('mobile') }}
+                                                {{ $errors->first('mobile_no') }}
                                             </div>
                                         @endif
                                     </div>
