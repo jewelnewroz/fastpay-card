@@ -123,11 +123,12 @@
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     })
-
+    @if(session()->has('status') && session()->has('message'))
     Toast.fire({
-        icon: 'success',
-        title: 'Signed in successfully'
+        icon: '{{ session()->get('status') ? 'success' : 'error' }}',
+        title: '{{ session()->get('message') }}'
     })
+    @endif
 </script>
 @yield('footer')
 </body>
