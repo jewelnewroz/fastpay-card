@@ -21,7 +21,12 @@ return [
     'transaction' => [
         'statuses' => [
             0 => 'Inactive',
-            1 => 'Active'
+            1 => 'Active',
+            2 => 'Failed',
+            3 => 'Pending',
+            4 => 'Processing',
+            5 => 'Other',
+            6 => 'Cancelled'
         ]
     ]
 ];
