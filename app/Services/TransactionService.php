@@ -19,13 +19,13 @@ class TransactionService
 
     public function getDataTable(Request $request): JsonResponse
     {
-        return DataTables()->eloquent($this->transactionRepository->getModel()->query())
+        return DataTables()->eloquent($this->transactionRepository->with(['sender', 'receiver', 'transactionType']))
             ->filter(function ($query) use ($request) {
                 if ($request->filled('status')) {
                     $query->where('status', '=', $request->input('status'));
                 }
-                if ($request->has('transaction_id')) {
-                    $query->where('name', '=', $request->input('transaction_id'));
+                if ($request->filled('keyword')) {
+                    $query->where('tx_unique_id', '=', $request->input('keyword'));
                 }
             })
             ->addColumn('created_at', function (Transaction $transaction) {

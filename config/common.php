@@ -17,5 +17,11 @@ return [
             0 => 'Inactive',
             1 => 'Active'
         ]
+    ],
+    'transaction' => [
+        'statuses' => [
+            0 => 'Inactive',
+            1 => 'Active'
+        ]
     ]
 ];

@@ -31,22 +31,19 @@
                         <thead>
                         <tr>
                             <th>
-                                <div>Logo</div>
+                                <div>Trx ID</div>
                             </th>
                             <th>
-                                <div>Operator name</div>
+                                <div>Sender</div>
                             </th>
                             <th>
-                                <div>Store</div>
+                                <div>Receiver</div>
                             </th>
                             <th>
-                                <div>Type</div>
+                                <div>Transaction type</div>
                             </th>
                             <th>
-                                <div>Position</div>
-                            </th>
-                            <th>
-                                <div>Eligible for</div>
+                                <div>Amount</div>
                             </th>
                             <th>
                                 <div>Status</div>
@@ -107,41 +104,16 @@
                 "searching": false,
                 saveState: true,
                 "columns": [
-                    {
-                        "mRender": function (data, type, row) {
-                            return '<img class="table-avatar" src="' + row['logo'] + '">';
-                        }
-                    },
-                    {"data": "name"},
-                    {"data": "store"},
-                    {"data": "active_system"},
-                    {"data": "position"},
-                    {
-                        "mRender": function (data, type, row) {
-                            let str = '';
-                            if (row['eligibility'].length > 0) {
-                                for (let i = 0; i < row['eligibility'].length; i++) {
-                                    str += '<span class="badge badge-primary">' + row['eligibility'][i] + '</span> ';
-                                }
-                            }
-                            return str;
-                        }
-                    },
+                    {"data": "tx_unique_id"},
+                    {"data": "sender.name"},
+                    {"data": "receiver.name"},
+                    {"data": "transaction_type.name"},
+                    {"data": "amount"},
                     {"data": "status"},
                     {"data": "created_at"},
                     {
                         "mRender": function (data, type, row) {
-                            let str = "<div class='btn-group'> <button class='btn btn-default btn-sm dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fa fa-ellipsis-h' aria-hidden='true'></i></button> <div class='dropdown-menu dropdown-menu-right'> ";
-                            str += "<a href='/dashboard/operator/" + row['id'] + "' class='dropdown-item'><i class='fa fa-eye'></i> View</a> ";
-                            str += "<a href='/dashboard/operator/" + row['id'] + "/edit' class='dropdown-item'><i class='fa fa-edit'></i> Edit</a> ";
-                            if (row['status'] != 'Active') {
-                                str += "<a href='#' class='dropdown-item user-action' data-action='active' data-user-id='" + row['id'] + "'><i class='fa fa-check'></i> Active</a> ";
-                            } else {
-                                str += "<a href='#' class='dropdown-item user-action' data-action='deactive' data-user-id='" + row['id'] + "'><i class='fa fa-ban'></i> Deactive</a> ";
-                            }
-                            str += "</div> </div>";
-
-                            return str;
+                            return "<a href='/dashboard/transaction/" + row['id'] + "' class='btn btn-default'><i class='fa fa-eye'></i></a> ";
                         }
                     }
                 ],
