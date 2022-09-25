@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\View\Composers\GatewayComposer;
 use App\Http\View\Composers\OperatorComposer;
 use App\Http\View\Composers\PathComposer;
 use App\Http\View\Composers\PermissionComposer;
@@ -31,6 +32,10 @@ class ViewServiceProvider extends ServiceProvider
             'admin.bundle.create',
             'admin.bundle.edit'
         ], OperatorComposer::class);
+        View::composer([
+            'admin.operator.create',
+            'admin.operator.edit'
+        ], GatewayComposer::class);
     }
 
     public function boot()

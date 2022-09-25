@@ -15,7 +15,8 @@ class CreateGatewaysTable extends Migration
     {
         Schema::create('gateways', function (Blueprint $table) {
             $table->id();
-            $table->rename('name');
+            $table->string('name');
+            $table->string('label');
         });
     }
 
