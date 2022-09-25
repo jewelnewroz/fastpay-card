@@ -7,6 +7,7 @@ use App\Http\View\Composers\OperatorComposer;
 use App\Http\View\Composers\PathComposer;
 use App\Http\View\Composers\PermissionComposer;
 use App\Http\View\Composers\RoleComposer;
+use App\Http\View\Composers\TransactionTypeComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -32,10 +33,15 @@ class ViewServiceProvider extends ServiceProvider
             'admin.bundle.create',
             'admin.bundle.edit'
         ], OperatorComposer::class);
+
         View::composer([
             'admin.operator.create',
             'admin.operator.edit'
         ], GatewayComposer::class);
+
+        View::composer([
+            'admin.transaction.index'
+        ], TransactionTypeComposer::class);
     }
 
     public function boot()
