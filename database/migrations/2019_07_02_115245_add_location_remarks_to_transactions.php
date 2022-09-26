@@ -13,9 +13,11 @@ class AddLocationRemarksToTransactions extends Migration
      */
     public function up()
     {
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->string('location_remarks')->nullable();
-        });
+        if(!Schema::hasColumn('transactions', 'location_remarks')) {
+            Schema::table('transactions', function (Blueprint $table) {
+                $table->string('location_remarks')->nullable();
+            });
+        }
     }
 
     /**

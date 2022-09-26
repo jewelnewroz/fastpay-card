@@ -13,7 +13,7 @@ class AddColumnsToOperatorsTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('operators')) {
+        if(!Schema::hasColumn('operators', 'currency')) {
             Schema::table('operators', function (Blueprint $table) {
                 $table->char('currency', 4)->default('IQD')->after('user_id');
                 $table->string('action_url')->nullable()->after('currency');

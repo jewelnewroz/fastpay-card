@@ -13,9 +13,11 @@ class AddToTxTypes extends Migration
      */
     public function up()
     {
-        Schema::table('transaction_types', function (Blueprint $table) {
-            $table->tinyInteger('is_printable')->default(0)->after('name');
-        });
+        if(!Schema::hasColumn('transaction_types', 'is_printable')) {
+            Schema::table('transaction_types', function (Blueprint $table) {
+                $table->tinyInteger('is_printable')->default(0)->after('name');
+            });
+        }
     }
 
     /**

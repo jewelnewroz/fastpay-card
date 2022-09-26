@@ -13,9 +13,11 @@ class AddNoOfPinsToRechargePlansTable extends Migration
      */
     public function up()
     {
-        Schema::table('recharge_plans', function (Blueprint $table) {
-            $table->smallInteger('no_of_pins')->default(1);
-        });
+        if(!Schema::hasColumn('recharge_plans', 'no_of_pins')) {
+            Schema::table('recharge_plans', function (Blueprint $table) {
+                $table->smallInteger('no_of_pins')->default(1);
+            });
+        }
     }
 
     /**

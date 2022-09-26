@@ -13,9 +13,11 @@ class AddToDataBundles extends Migration
      */
     public function up()
     {
-        Schema::table('data_bundles', function (Blueprint $table) {
-            $table->unsignedInteger('transaction_id')->nullable()->after('operator_id');
-        });
+        if(!Schema::hasColumn('bundles', 'transaction_id')) {
+            Schema::table('bundles', function (Blueprint $table) {
+                $table->unsignedInteger('transaction_id')->nullable();
+            });
+        }
     }
 
     /**

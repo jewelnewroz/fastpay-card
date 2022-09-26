@@ -13,10 +13,12 @@ class AddFieldsToActivityLogs extends Migration
      */
     public function up()
     {
-        Schema::table('activity_logs', function (Blueprint $table) {
-            $table->string('city',128)->nullable()->after('ip_address');
-            $table->string('country',64)->nullable()->after('city');
-        });
+        if(!Schema::hasColumn('activity_logs', 'city')) {
+            Schema::table('activity_logs', function (Blueprint $table) {
+                $table->string('city', 128)->nullable()->after('ip_address');
+                $table->string('country', 64)->nullable()->after('city');
+            });
+        }
     }
 
     /**

@@ -13,9 +13,11 @@ class AddCurrencyColumnToCountriesTable extends Migration
      */
     public function up()
     {
-        Schema::table('countries', function (Blueprint $table) {
-            $table->string('currency', 6)->nullable()->after('prefix');
-        });
+        if(!Schema::hasColumn('countries', 'currency')) {
+            Schema::table('countries', function (Blueprint $table) {
+                $table->string('currency', 6)->nullable()->after('prefix');
+            });
+        }
     }
 
     /**

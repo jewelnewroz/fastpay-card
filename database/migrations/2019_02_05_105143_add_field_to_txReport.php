@@ -13,9 +13,11 @@ class AddFieldToTxReport extends Migration
      */
     public function up()
     {
-        Schema::table('transaction_reports', function (Blueprint $table) {
-            $table->decimal('current_balance',16,2)->after('credit');
-        });
+        if(!Schema::hasColumn('transaction_reports', 'current_balance')) {
+            Schema::table('transaction_reports', function (Blueprint $table) {
+                $table->decimal('current_balance', 16, 2)->after('credit');
+            });
+        }
     }
 
     /**

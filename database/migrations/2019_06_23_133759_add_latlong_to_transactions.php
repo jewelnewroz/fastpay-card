@@ -13,10 +13,12 @@ class AddLatlongToTransactions extends Migration
      */
     public function up()
     {
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->decimal('latitude', 10, 8)->nullable();
-            $table->decimal('longitude', 11, 8)->nullable();
-        });
+        if(!Schema::hasColumn('transactions', 'latitude')) {
+            Schema::table('transactions', function (Blueprint $table) {
+                $table->decimal('latitude', 10, 8)->nullable();
+                $table->decimal('longitude', 11, 8)->nullable();
+            });
+        }
     }
 
     /**

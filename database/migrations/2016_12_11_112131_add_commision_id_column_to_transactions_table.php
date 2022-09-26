@@ -13,9 +13,11 @@ class AddCommisionIdColumnToTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->string('commission_id', 32)->nullable()->after('amount');
-        });
+        if(!Schema::hasColumn('transactions', 'commission_id')) {
+            Schema::table('transactions', function (Blueprint $table) {
+                $table->string('commission_id', 32)->nullable()->after('amount');
+            });
+        }
     }
 
     /**

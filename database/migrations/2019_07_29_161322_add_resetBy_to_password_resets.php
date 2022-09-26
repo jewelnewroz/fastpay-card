@@ -13,9 +13,11 @@ class AddResetByToPasswordResets extends Migration
      */
     public function up()
     {
-        Schema::table('password_resets', function (Blueprint $table) {
-            $table->tinyInteger('reset_req_by')->nullable();
-        });
+        if(!Schema::hasColumn('password_resets', 'reset_req_by')) {
+            Schema::table('password_resets', function (Blueprint $table) {
+                $table->tinyInteger('reset_req_by')->nullable();
+            });
+        }
     }
 
     /**

@@ -13,9 +13,11 @@ class AddUserIdToAccountReport extends Migration
      */
     public function up()
     {
-        Schema::table('account_balance_reports', function (Blueprint $table) {
-            $table->bigInteger('user_id')->nullable()->after('id');
-        });
+        if(!Schema::hasColumn('account_balance_reports', 'user_id')) {
+            Schema::table('account_balance_reports', function (Blueprint $table) {
+                $table->bigInteger('user_id')->nullable()->after('id');
+            });
+        }
     }
 
     /**

@@ -13,9 +13,11 @@ class AddOneColumnToMintRouteBrandsTable extends Migration
      */
     public function up()
     {
-        Schema::table('mint_route_brands', function (Blueprint $table) {
-            $table->integer('operator_id')->after('id');
-        });
+        if(!Schema::hasColumn('mint_route_brands', 'operator_id')) {
+            Schema::table('mint_route_brands', function (Blueprint $table) {
+                $table->integer('operator_id')->after('id');
+            });
+        }
     }
 
     /**

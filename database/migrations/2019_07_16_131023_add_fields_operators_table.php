@@ -13,11 +13,13 @@ class AddFieldsOperatorsTable extends Migration
      */
     public function up()
     {
-        Schema::table('operators', function (Blueprint $table) {
-            $table->string('title',255)->nullable()->after('name');
-            $table->string('store',255)->nullable()->after('logo');
+        if(!Schema::hasColumn('operators', 'title')) {
+            Schema::table('operators', function (Blueprint $table) {
+                $table->string('title', 255)->nullable()->after('name');
+                $table->string('store', 255)->nullable()->after('logo');
 
-        });
+            });
+        }
     }
 
     /**

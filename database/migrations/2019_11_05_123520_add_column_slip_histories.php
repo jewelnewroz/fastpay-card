@@ -13,9 +13,11 @@ class AddColumnSlipHistories extends Migration
      */
     public function up()
     {
-        Schema::table('slip_histories', function (Blueprint $table) {
-            $table->unsignedInteger('operator_id')->after('operator')->nullable();
-        });
+        if(!Schema::hasColumn('slip_histories', 'operator_id')) {
+            Schema::table('slip_histories', function (Blueprint $table) {
+                $table->unsignedInteger('operator_id')->nullable();
+            });
+        }
     }
 
     /**

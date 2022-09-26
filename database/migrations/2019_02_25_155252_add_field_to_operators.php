@@ -13,9 +13,11 @@ class AddFieldToOperators extends Migration
      */
     public function up()
     {
-        Schema::table('operators', function (Blueprint $table) {
-            $table->json('eligibility')->nullable();
-        });
+        if(!Schema::hasColumn('operators', 'eligibility')) {
+            Schema::table('operators', function (Blueprint $table) {
+                $table->json('eligibility')->nullable();
+            });
+        }
     }
 
     /**

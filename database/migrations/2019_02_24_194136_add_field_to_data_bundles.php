@@ -13,9 +13,11 @@ class AddFieldToDataBundles extends Migration
      */
     public function up()
     {
-        Schema::table('data_bundles', function (Blueprint $table) {
-            $table->json('eligibility')->nullable();
-        });
+        if(!Schema::hasColumn('bundles', 'eligibility')) {
+            Schema::table('bundles', function (Blueprint $table) {
+                $table->json('eligibility')->nullable();
+            });
+        }
     }
 
     /**

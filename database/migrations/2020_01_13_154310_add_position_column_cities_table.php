@@ -13,9 +13,11 @@ class AddPositionColumnCitiesTable extends Migration
      */
     public function up()
     {
-        Schema::table('cities', function (Blueprint $table) {
-            $table->integer('position')->after('state_id')->nullable();
-        });
+        if(!Schema::hasColumn('cities', 'position')) {
+            Schema::table('cities', function (Blueprint $table) {
+                $table->integer('position')->nullable();
+            });
+        }
     }
 
     /**

@@ -13,9 +13,11 @@ class AddAttemptCountToPasswordReset extends Migration
      */
     public function up()
     {
-        Schema::table('password_resets', function (Blueprint $table) {
-            $table->integer('failed_attempts')->default(0)->after('reset_req_by');
-        });
+        if(!Schema::hasColumn('password_resets', 'failed_attempts')) {
+            Schema::table('password_resets', function (Blueprint $table) {
+                $table->integer('failed_attempts')->default(0)->after('reset_req_by');
+            });
+        }
     }
 
     /**

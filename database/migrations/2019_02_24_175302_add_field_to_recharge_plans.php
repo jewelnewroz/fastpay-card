@@ -13,9 +13,11 @@ class AddFieldToRechargePlans extends Migration
      */
     public function up()
     {
-        Schema::table('recharge_plans', function (Blueprint $table) {
-            $table->json('eligibility')->nullable();
-        });
+        if(!Schema::hasColumn('recharge_plans', 'eligibility')) {
+            Schema::table('recharge_plans', function (Blueprint $table) {
+                $table->json('eligibility')->nullable();
+            });
+        }
     }
 
     /**

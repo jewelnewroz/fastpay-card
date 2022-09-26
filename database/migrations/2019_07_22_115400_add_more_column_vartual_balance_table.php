@@ -13,10 +13,11 @@ class AddMoreColumnVartualBalanceTable extends Migration
      */
     public function up()
     {
-        Schema::table('virtual_balances', function (Blueprint $table) {
-            $table->string('remarks',255)->nullable();
-
-        });
+        if(!Schema::hasColumn('virtual_balances', 'remarks')) {
+            Schema::table('virtual_balances', function (Blueprint $table) {
+                $table->string('remarks', 255)->nullable();
+            });
+        }
     }
 
     /**

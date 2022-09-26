@@ -13,9 +13,11 @@ class AddColumnsToTransationReportsTable extends Migration
      */
     public function up()
     {
-        Schema::table('transaction_reports', function (Blueprint $table) {
-            $table->bigInteger('user_id')->index()->after('tx_unique_id');
-        });
+        if(!Schema::hasColumn('transaction_reports', 'user_id')) {
+            Schema::table('transaction_reports', function (Blueprint $table) {
+                $table->bigInteger('user_id')->index()->after('tx_unique_id');
+            });
+        }
     }
 
     /**

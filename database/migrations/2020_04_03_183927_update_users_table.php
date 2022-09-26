@@ -13,9 +13,11 @@ class UpdateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->boolean('is_betting_merchant')->default(0);
-        });
+        if(!Schema::hasColumn('users', 'is_betting_merchant')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->boolean('is_betting_merchant')->default(0);
+            });
+        }
     }
 
     /**

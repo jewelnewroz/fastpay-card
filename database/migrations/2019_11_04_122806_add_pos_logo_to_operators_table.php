@@ -13,9 +13,11 @@ class AddPosLogoToOperatorsTable extends Migration
      */
     public function up()
     {
-        Schema::table('operators', function (Blueprint $table) {
-            $table->string('pos_logo', 255)->after('logo')->nullable();
-        });
+        if(!Schema::hasColumn('operators', 'pos_logo')) {
+            Schema::table('operators', function (Blueprint $table) {
+                $table->string('pos_logo', 255)->after('logo')->nullable();
+            });
+        }
     }
 
     /**

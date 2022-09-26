@@ -13,9 +13,11 @@ class AddOneColumnToOperatorsTable extends Migration
      */
     public function up()
     {
-        Schema::table('operators', function (Blueprint $table) {
-            $table->string('active_system')->nullable();
-        });
+        if(!Schema::hasColumn('operators', 'active_system')) {
+            Schema::table('operators', function (Blueprint $table) {
+                $table->string('active_system')->nullable();
+            });
+        }
     }
 
     /**

@@ -13,10 +13,12 @@ class AddCorporateIdColumnsToCommissionsTable extends Migration
      */
     public function up()
     {
-        Schema::table('commissions', function (Blueprint $table) {
-            $table->integer('corporate_id')->unsigned()->index()->nullable()->after('id');
-            $table->foreign('corporate_id')->references('id')->on('corporates')->onDelete('cascade');
-        });
+        if(!Schema::hasColumn('commissions', 'corporate_id')) {
+            Schema::table('commissions', function (Blueprint $table) {
+                $table->integer('corporate_id')->unsigned()->index()->nullable()->after('id');
+                $table->foreign('corporate_id')->references('id')->on('corporates')->onDelete('cascade');
+            });
+        }
     }
 
     /**

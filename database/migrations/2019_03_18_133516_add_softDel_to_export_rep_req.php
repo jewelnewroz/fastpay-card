@@ -13,9 +13,11 @@ class AddSoftDelToExportRepReq extends Migration
      */
     public function up()
     {
-        Schema::table('export_report_requests', function (Blueprint $table) {
-            $table->softDeletes();
-        });
+        if(!Schema::hasColumn('export_report_requests', 'deleted_at')) {
+            Schema::table('export_report_requests', function (Blueprint $table) {
+                $table->softDeletes();
+            });
+        }
     }
 
     /**

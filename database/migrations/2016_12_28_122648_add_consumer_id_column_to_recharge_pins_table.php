@@ -13,10 +13,12 @@ class AddConsumerIdColumnToRechargePinsTable extends Migration
      */
     public function up()
     {
-        Schema::table('recharge_pins', function (Blueprint $table) {
-            $table->integer('consumer_id')->unsigned()->index()->nullable();
-            $table->foreign('consumer_id')->references('id')->on('users')->onDelete('set null');
-        });
+        if(!Schema::hasColumn('recharge_pins', 'commission_id')) {
+            Schema::table('recharge_pins', function (Blueprint $table) {
+                $table->integer('consumer_id')->unsigned()->index()->nullable();
+                $table->foreign('consumer_id')->references('id')->on('users')->onDelete('set null');
+            });
+        }
     }
 
     /**

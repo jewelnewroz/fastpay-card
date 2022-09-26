@@ -13,9 +13,11 @@ class AddUniqueIdToTransaction extends Migration
      */
     public function up()
     {
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->string('tx_unique_id',10)->unique()->nullable()->after('id');
-        });
+        if(!Schema::hasColumn('transactions', 'tx_unique_id')) {
+            Schema::table('transactions', function (Blueprint $table) {
+                $table->string('tx_unique_id', 10)->unique()->nullable()->after('id');
+            });
+        }
     }
 
     /**

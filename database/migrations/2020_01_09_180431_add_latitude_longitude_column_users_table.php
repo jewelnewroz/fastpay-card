@@ -13,10 +13,12 @@ class AddLatitudeLongitudeColumnUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->decimal('latitude', 10, 8)->nullable();
-            $table->decimal('longitude', 11, 8)->after('latitude')->nullable();
-        });
+        if(!Schema::hasColumn('users', 'latitude')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->decimal('latitude', 10, 8)->nullable();
+                $table->decimal('longitude', 11, 8)->after('latitude')->nullable();
+            });
+        }
     }
 
     /**

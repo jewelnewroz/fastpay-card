@@ -13,9 +13,11 @@ class AddToRachargePins extends Migration
      */
     public function up()
     {
-        Schema::table('recharge_pins', function (Blueprint $table) {
-            $table->unsignedInteger('transaction_id')->nullable()->after('operator_id');
-        });
+        if(!Schema::hasColumn('recharge_pins', 'transaction_id')) {
+            Schema::table('recharge_pins', function (Blueprint $table) {
+                $table->unsignedInteger('transaction_id')->nullable()->after('operator_id');
+            });
+        }
     }
 
     /**

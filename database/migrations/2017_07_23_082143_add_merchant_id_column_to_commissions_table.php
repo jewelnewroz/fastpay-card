@@ -13,10 +13,12 @@ class AddMerchantIdColumnToCommissionsTable extends Migration
      */
     public function up()
     {
-        Schema::table('commissions', function (Blueprint $table) {
-            $table->integer('merchant_id')->unsigned()->index()->nullable()->after('corporate_id');
-            $table->foreign('merchant_id')->references('id')->on('users')->onDelete('set null');
-        });
+        if(!Schema::hasColumn('commissions', 'merchant_id')) {
+            Schema::table('commissions', function (Blueprint $table) {
+                $table->integer('merchant_id')->unsigned()->index()->nullable()->after('corporate_id');
+                $table->foreign('merchant_id')->references('id')->on('users')->onDelete('set null');
+            });
+        }
     }
 
     /**

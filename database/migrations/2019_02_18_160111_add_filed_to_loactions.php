@@ -13,10 +13,12 @@ class AddFiledToLoactions extends Migration
      */
     public function up()
     {
-        Schema::table('locations', function (Blueprint $table) {
-            $table->string('open',32)->nullable();
-            $table->string('close',32)->nullable()->after('open');
-        });
+        if(!Schema::hasColumn('locations', 'open')) {
+            Schema::table('locations', function (Blueprint $table) {
+                $table->string('open', 32)->nullable();
+                $table->string('close', 32)->nullable()->after('open');
+            });
+        }
     }
 
     /**

@@ -13,10 +13,12 @@ class AddCountryIdColumnInCommissionsTable extends Migration
      */
     public function up()
     {
-        Schema::table('commissions', function (Blueprint $table) {
-            $table->integer('country_id')->unsigned()->index()->after('max_amount')->nullable();
-            $table->foreign('country_id')->references('id')->on('countries');
-        });
+        if(!Schema::hasColumn('commissions', 'country_id')) {
+            Schema::table('commissions', function (Blueprint $table) {
+                $table->integer('country_id')->unsigned()->index()->after('max_amount')->nullable();
+                $table->foreign('country_id')->references('id')->on('countries');
+            });
+        }
     }
 
     /**

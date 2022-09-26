@@ -13,9 +13,11 @@ class AddFiledToExportReportReq extends Migration
      */
     public function up()
     {
-        Schema::table('export_report_requests', function (Blueprint $table) {
-            $table->string('remark',255)->nullable()->after('user_id');
-        });
+        if(!Schema::hasColumn('export_report_requests', 'remark')) {
+            Schema::table('export_report_requests', function (Blueprint $table) {
+                $table->string('remark', 255)->nullable()->after('user_id');
+            });
+        }
     }
 
     /**
