@@ -36,7 +36,9 @@ class ViewServiceProvider extends ServiceProvider
 
         View::composer([
             'admin.operator.create',
-            'admin.operator.edit'
+            'admin.operator.edit',
+            'admin.bundle.create',
+            'admin.bundle.edit'
         ], GatewayComposer::class);
 
         View::composer([

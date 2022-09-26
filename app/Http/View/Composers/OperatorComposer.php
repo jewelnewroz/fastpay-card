@@ -24,6 +24,6 @@ class OperatorComposer
      */
     public function compose(View $view)
     {
-        $view->with('roles', $this->operatorService->all());
+        $view->with('operators', $this->operatorService->all());
     }
 }

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Operator;
 use App\Repositories\Interfaces\OperatorRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 
 class OperatorService
@@ -38,5 +39,10 @@ class OperatorService
     public function all()
     {
         return $this->operatorRepository->all();
+    }
+
+    public function create($request): Model
+    {
+        return $this->operatorRepository->create($request->validated());
     }
 }

@@ -5,9 +5,6 @@
     <article class="content items-list-page">
         <form name="item" id="customerForm" action="{{ route('operator.store')}}" method="POST">
             @csrf
-            @if(count(array_intersect($errors->all(), ['name', 'mobile', 'email'])) > 0)
-                error found
-            @endif
             <div class="card-body" style="border:1px solid #eee;">
                 <div class="row">
                     <div class="col-sm-6">
