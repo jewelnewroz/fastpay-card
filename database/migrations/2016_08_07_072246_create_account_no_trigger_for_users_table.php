@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class CreateAccountNoTriggerForUsersTable extends Migration
 {
@@ -12,7 +13,7 @@ class CreateAccountNoTriggerForUsersTable extends Migration
      */
     public function up()
     {
-        \Illuminate\Support\Facades\DB::unprepared("
+        DB::unprepared("
         CREATE TRIGGER ins_account_no BEFORE INSERT ON users
         FOR EACH ROW
         SET
@@ -27,6 +28,6 @@ class CreateAccountNoTriggerForUsersTable extends Migration
      */
     public function down()
     {
-        \Illuminate\Support\Facades\DB::unprepared('DROP TRIGGER `ins_account_no`');
+        DB::unprepared('DROP TRIGGER `ins_account_no`');
     }
 }

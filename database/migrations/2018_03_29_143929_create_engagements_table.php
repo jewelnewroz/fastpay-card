@@ -13,12 +13,14 @@ class CreateEngagementsTable extends Migration
      */
     public function up()
     {
-      Schema::create('engagements', function (Blueprint $table) {
-          $table->increments('id');
-          $table->json('counts');
-          $table->json('files');
-          $table->timestamps();
-      });
+        if (!Schema::hasTable('engagements')) {
+            Schema::create('engagements', function (Blueprint $table) {
+                $table->increments('id');
+                $table->json('counts');
+                $table->json('files');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

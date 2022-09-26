@@ -13,11 +13,13 @@ class CreateOnlineCardProcessSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('online_card_process_settings', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('active_onlinecard_system');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('online_card_process_settings')) {
+            Schema::create('online_card_process_settings', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('active_onlinecard_system');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

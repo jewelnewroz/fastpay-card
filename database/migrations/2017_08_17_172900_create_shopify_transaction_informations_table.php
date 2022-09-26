@@ -13,12 +13,14 @@ class CreateShopifyTransactionInformationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('shopify_transaction_informations', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('order_id', 64)->index();
-            $table->text('payload');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('shopify_transaction_informations')) {
+            Schema::create('shopify_transaction_informations', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('order_id', 64)->index();
+                $table->text('payload');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

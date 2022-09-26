@@ -13,14 +13,16 @@ class CreateMerchantCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('merchant_categories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('shop_category_id')->unsigned()->index();
-            $table->foreign('shop_category_id')->references('id')->on('shop_categories')->onDelete('cascade');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('merchant_categories')) {
+            Schema::create('merchant_categories', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('user_id')->unsigned()->index();
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+                $table->integer('shop_category_id')->unsigned()->index();
+                $table->foreign('shop_category_id')->references('id')->on('shop_categories')->onDelete('cascade');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

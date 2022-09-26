@@ -13,15 +13,17 @@ class CreateExportReportRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('export_report_requests', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('feature',64)->index();
-            $table->json('request_query');
-            $table->string('file_path')->nullable();
-            $table->tinyInteger('status')->default(0);
-            $table->unsignedInteger('user_id');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('export_report_requests')) {
+            Schema::create('export_report_requests', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('feature', 64)->index();
+                $table->json('request_query');
+                $table->string('file_path')->nullable();
+                $table->tinyInteger('status')->default(0);
+                $table->unsignedInteger('user_id');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

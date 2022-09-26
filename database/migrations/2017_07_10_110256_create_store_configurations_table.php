@@ -13,18 +13,20 @@ class CreateStoreConfigurationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('store_configurations', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('merchant_id')->unsigned()->index();
-            $table->foreign('merchant_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('store_url')->nullable();
-            $table->string('ipn_url')->nullable();
-            $table->string('success_url')->nullable();
-            $table->string('cancel_url')->nullable();
-            $table->string('fail_url')->nullable();
-            $table->string('store_password')->nullable();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('store_configurations')) {
+            Schema::create('store_configurations', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('merchant_id')->unsigned()->index();
+                $table->foreign('merchant_id')->references('id')->on('users')->onDelete('cascade');
+                $table->string('store_url')->nullable();
+                $table->string('ipn_url')->nullable();
+                $table->string('success_url')->nullable();
+                $table->string('cancel_url')->nullable();
+                $table->string('fail_url')->nullable();
+                $table->string('store_password')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

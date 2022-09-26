@@ -13,14 +13,16 @@ class CreateUniqueTransactionReportsTable extends Migration
      */
     public function up()
     {
-      Schema::create('unique_transaction_reports', function (Blueprint $table) {
-          $table->increments('id');
-          $table->integer('month');
-          $table->integer('year');
-          $table->integer('count')->default(0);
-          $table->text('file')->nullable();
-          $table->timestamps();
-      });
+        if (!Schema::hasTable('unique_transaction_reports')) {
+            Schema::create('unique_transaction_reports', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('month');
+                $table->integer('year');
+                $table->integer('count')->default(0);
+                $table->text('file')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

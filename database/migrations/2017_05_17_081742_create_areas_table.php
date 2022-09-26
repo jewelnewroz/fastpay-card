@@ -13,14 +13,16 @@ class CreateAreasTable extends Migration
      */
     public function up()
     {
-        Schema::create('areas', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('city_id')->unsigned()->index();
-            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
-            $table->string('name', 64);
-            $table->boolean('status')->default(true);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('areas')) {
+            Schema::create('areas', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('city_id')->unsigned()->index();
+                $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
+                $table->string('name', 64);
+                $table->boolean('status')->default(true);
+                $table->timestamps();
+            });
+        }
     }
 
     /**

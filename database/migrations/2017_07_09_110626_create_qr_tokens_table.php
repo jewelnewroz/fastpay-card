@@ -13,13 +13,15 @@ class CreateQrTokensTable extends Migration
      */
     public function up()
     {
-        Schema::create('qr_tokens', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('token', 180)->unique()->index();
-            $table->string('payload', 500);
-            $table->boolean('status')->default(false)->comment("0 for Generation, 1 for Accepted Payment");
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('qr_tokens')) {
+            Schema::create('qr_tokens', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('token', 180)->unique()->index();
+                $table->string('payload', 500);
+                $table->boolean('status')->default(false)->comment("0 for Generation, 1 for Accepted Payment");
+                $table->timestamps();
+            });
+        }
     }
 
     /**

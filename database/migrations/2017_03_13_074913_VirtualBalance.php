@@ -12,13 +12,15 @@ class VirtualBalance extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('virtual_balances', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->double('amount', 16, 4);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('virtual_balances')) {
+            Schema::create('virtual_balances', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('user_id')->unsigned();
+                $table->foreign('user_id')->references('id')->on('users');
+                $table->double('amount', 16, 4);
+                $table->timestamps();
+            });
+        }
     }
 
     /**

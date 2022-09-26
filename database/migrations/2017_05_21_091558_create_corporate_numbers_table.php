@@ -13,14 +13,16 @@ class CreateCorporateNumbersTable extends Migration
      */
     public function up()
     {
-        Schema::create('corporate_numbers', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('corporate_id')->unsigned()->index()->nullable();
-            $table->foreign('corporate_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('mobile_no', 32)->index();
-            $table->boolean('status')->default(true);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('corporate_numbers')) {
+            Schema::create('corporate_numbers', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('corporate_id')->unsigned()->index()->nullable();
+                $table->foreign('corporate_id')->references('id')->on('users')->onDelete('cascade');
+                $table->string('mobile_no', 32)->index();
+                $table->boolean('status')->default(true);
+                $table->timestamps();
+            });
+        }
     }
 
     /**

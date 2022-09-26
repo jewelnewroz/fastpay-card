@@ -13,10 +13,12 @@ class CreateAccountListingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('account_listings', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('account_listings')) {
+            Schema::create('account_listings', function (Blueprint $table) {
+                $table->increments('id');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

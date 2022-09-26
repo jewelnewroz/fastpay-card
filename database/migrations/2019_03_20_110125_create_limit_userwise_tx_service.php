@@ -13,26 +13,28 @@ class CreateLimitUserwiseTxService extends Migration
      */
     public function up()
     {
-        Schema::create('limit_userwise_tx_service', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('account_type',32)->index();
-            $table->unsignedInteger('transaction_type_id')->nullable();
-            $table->boolean('verified');
+        if (!Schema::hasTable('limit_userwise_tx_service')) {
+            Schema::create('limit_userwise_tx_service', function (Blueprint $table) {
+                $table->increments('id');
+                $table->unsignedInteger('user_id');
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+                $table->string('account_type', 32)->index();
+                $table->unsignedInteger('transaction_type_id')->nullable();
+                $table->boolean('verified');
 
-            $table->integer('daily_max_out_tx')->nullable();
-            $table->unsignedBigInteger('daily_max_amount_out_tx')->nullable();
-            $table->integer('monthly_max_out_tx')->nullable();
-            $table->unsignedBigInteger('monthly_max_amount_out_tx')->nullable();
+                $table->integer('daily_max_out_tx')->nullable();
+                $table->unsignedBigInteger('daily_max_amount_out_tx')->nullable();
+                $table->integer('monthly_max_out_tx')->nullable();
+                $table->unsignedBigInteger('monthly_max_amount_out_tx')->nullable();
 
-            $table->integer('daily_max_in_tx')->nullable();
-            $table->unsignedBigInteger('daily_max_amount_in_tx')->nullable();
-            $table->integer('monthly_max_in_tx')->nullable();
-            $table->unsignedBigInteger('monthly_max_amount_in_tx')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
-        });
+                $table->integer('daily_max_in_tx')->nullable();
+                $table->unsignedBigInteger('daily_max_amount_in_tx')->nullable();
+                $table->integer('monthly_max_in_tx')->nullable();
+                $table->unsignedBigInteger('monthly_max_amount_in_tx')->nullable();
+                $table->timestamps();
+                $table->softDeletes();
+            });
+        }
     }
 
     /**

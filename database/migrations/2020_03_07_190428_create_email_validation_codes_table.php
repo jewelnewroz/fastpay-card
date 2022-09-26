@@ -13,14 +13,16 @@ class CreateEmailValidationCodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('email_validation_codes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('email', 80)->index();
-            $table->integer('validation_code')->index();
-            $table->ipAddress('ip_address');
-            $table->boolean('status')->default(false);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('email_validation_codes')) {
+            Schema::create('email_validation_codes', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('email', 80)->index();
+                $table->integer('validation_code')->index();
+                $table->ipAddress('ip_address');
+                $table->boolean('status')->default(false);
+                $table->timestamps();
+            });
+        }
     }
 
     /**

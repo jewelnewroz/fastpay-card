@@ -13,11 +13,13 @@ class CreateFailedLoginAttemptsTable extends Migration
      */
     public function up()
     {
-        Schema::create('failed_login_attempts', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('mobile_no', 32)->index();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('failed_login_attempts')) {
+            Schema::create('failed_login_attempts', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('mobile_no', 32)->index();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

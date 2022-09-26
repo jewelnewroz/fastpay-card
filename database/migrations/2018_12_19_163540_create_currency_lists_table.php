@@ -13,12 +13,14 @@ class CreateCurrencyListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('currency_lists', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name', 6)->unique()->index();
-            $table->boolean('status')->default(true);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('currency_lists')) {
+            Schema::create('currency_lists', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name', 6)->unique()->index();
+                $table->boolean('status')->default(true);
+                $table->timestamps();
+            });
+        }
     }
 
     /**

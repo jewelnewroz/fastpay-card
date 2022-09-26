@@ -13,14 +13,16 @@ class CreateMintRouteRequestResponsesTable extends Migration
      */
     public function up()
     {
-        Schema::create('mint_route_request_responses', function (Blueprint $table) {
-            $table->increments('id');
-            $table->json('request_param')->nullable();
-            $table->json('response_param')->nullable();
-            $table->integer('user_id')->unsigned()->index()->nullable();
-            $table->string('api',255)->nullable();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('mint_route_request_responses')) {
+            Schema::create('mint_route_request_responses', function (Blueprint $table) {
+                $table->increments('id');
+                $table->json('request_param')->nullable();
+                $table->json('response_param')->nullable();
+                $table->integer('user_id')->unsigned()->index()->nullable();
+                $table->string('api', 255)->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

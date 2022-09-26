@@ -13,11 +13,13 @@ class AddColumnsToOperatorsTable extends Migration
      */
     public function up()
     {
-        Schema::table('operators', function (Blueprint $table) {
-            $table->char('currency', 4)->default('IQD')->after('user_id');
-            $table->string('action_url')->nullable()->after('currency');
-            $table->text('additional_params')->nullable()->after('action_url');
-        });
+        if (!Schema::hasTable('operators')) {
+            Schema::table('operators', function (Blueprint $table) {
+                $table->char('currency', 4)->default('IQD')->after('user_id');
+                $table->string('action_url')->nullable()->after('currency');
+                $table->text('additional_params')->nullable()->after('action_url');
+            });
+        }
     }
 
     /**

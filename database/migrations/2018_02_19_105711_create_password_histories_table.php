@@ -13,13 +13,15 @@ class CreatePasswordHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('password_histories', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('user_id')->unsigned()->index()->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
-            $table->string('password')->nullable();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('password_histories')) {
+            Schema::create('password_histories', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->integer('user_id')->unsigned()->index()->nullable();
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+                $table->string('password')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

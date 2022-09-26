@@ -13,17 +13,19 @@ class CreateRechargePinsTable extends Migration
      */
     public function up()
     {
-        Schema::create('recharge_pins', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('operator_id')->unsigned()->index();
-            $table->foreign('operator_id')->references('id')->on('operators')->onDelete('cascade');
-            $table->decimal('denomination', 10, 2);
-            $table->string('serial_no', 64);
-            $table->string('pin', 64);
-            $table->date('expiry_date')->nullable();
-            $table->boolean('status')->default(false)->comment('0 for unused, 1 for used');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('recharge_pins')) {
+            Schema::create('recharge_pins', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('operator_id')->unsigned()->index();
+                $table->foreign('operator_id')->references('id')->on('operators')->onDelete('cascade');
+                $table->decimal('denomination', 10, 2);
+                $table->string('serial_no', 64);
+                $table->string('pin', 64);
+                $table->date('expiry_date')->nullable();
+                $table->boolean('status')->default(false)->comment('0 for unused, 1 for used');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

@@ -13,15 +13,17 @@ class CreateIncomingRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('incoming_requests', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('mobile_no', 32)->index();
-            $table->string('payload')->nullable();
-            $table->string('feature', 32)->index();
-            $table->string('ip_address', 64)->index();
-            $table->boolean('status')->default(true)->comment("1 = Success, 0 = Fail");
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('incoming_requests')) {
+            Schema::create('incoming_requests', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('mobile_no', 32)->index();
+                $table->string('payload')->nullable();
+                $table->string('feature', 32)->index();
+                $table->string('ip_address', 64)->index();
+                $table->boolean('status')->default(true)->comment("1 = Success, 0 = Fail");
+                $table->timestamps();
+            });
+        }
     }
 
     /**

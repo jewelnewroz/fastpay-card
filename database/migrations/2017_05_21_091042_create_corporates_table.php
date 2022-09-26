@@ -13,15 +13,17 @@ class CreateCorporatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('corporates', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name', 120);
-            $table->string('email', 120)->unique()->nullable();
-            $table->string('contact_no')->nullable();
-            $table->string('address')->nullable();
-            $table->boolean('status')->default(true);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('corporates')) {
+            Schema::create('corporates', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name', 120);
+                $table->string('email', 120)->unique()->nullable();
+                $table->string('contact_no')->nullable();
+                $table->string('address')->nullable();
+                $table->boolean('status')->default(true);
+                $table->timestamps();
+            });
+        }
     }
 
     /**

@@ -13,16 +13,18 @@ class CreateBranchesTable extends Migration
      */
     public function up()
     {
-        Schema::create('branches', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('bank_id')->unsigned()->index();
-            $table->foreign('bank_id')->references('id')->on('banks');
-            $table->string('name', 64)->index();
-            $table->string('code', 32)->nullable();
-            $table->string('swift_code', 64)->index();
-            $table->boolean('status')->default(true);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('branches')) {
+            Schema::create('branches', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('bank_id')->unsigned()->index();
+                $table->foreign('bank_id')->references('id')->on('banks');
+                $table->string('name', 64)->index();
+                $table->string('code', 32)->nullable();
+                $table->string('swift_code', 64)->index();
+                $table->boolean('status')->default(true);
+                $table->timestamps();
+            });
+        }
     }
 
     /**

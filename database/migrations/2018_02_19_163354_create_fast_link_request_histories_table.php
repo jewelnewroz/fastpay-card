@@ -13,13 +13,15 @@ class CreateFastLinkRequestHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('fast_link_request_histories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned()->index();
-            $table->text('request')->nullable();
-            $table->text('response')->nullable();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('fast_link_request_histories')) {
+            Schema::create('fast_link_request_histories', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('user_id')->unsigned()->index();
+                $table->text('request')->nullable();
+                $table->text('response')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

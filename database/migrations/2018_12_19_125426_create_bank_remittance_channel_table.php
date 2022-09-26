@@ -13,13 +13,15 @@ class CreateBankRemittanceChannelTable extends Migration
      */
     public function up()
     {
-        Schema::create('bank_remittance_channel', function (Blueprint $table) {
-            $table->integer('bank_id')->unsigned()->index();
-            $table->foreign('bank_id')->references('id')->on('banks');
-            $table->integer('remittance_channel_id')->unsigned()->index();
-            $table->foreign('remittance_channel_id')->references('id')->on('remittance_channels');
-            $table->boolean('status')->default(true);
-        });
+        if (!Schema::hasTable('bank_remittance_channel')) {
+            Schema::create('bank_remittance_channel', function (Blueprint $table) {
+                $table->integer('bank_id')->unsigned()->index();
+                $table->foreign('bank_id')->references('id')->on('banks');
+                $table->integer('remittance_channel_id')->unsigned()->index();
+                $table->foreign('remittance_channel_id')->references('id')->on('remittance_channels');
+                $table->boolean('status')->default(true);
+            });
+        }
     }
 
     /**

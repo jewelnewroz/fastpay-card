@@ -13,11 +13,13 @@ class CreateEmailVerificationTokensTable extends Migration
      */
     public function up()
     {
-        Schema::create('email_verification_tokens', function (Blueprint $table) {
-            $table->string('email', 80)->index();
-            $table->string('token', 80)->index();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('email_verification_tokens')) {
+            Schema::create('email_verification_tokens', function (Blueprint $table) {
+                $table->string('email', 80)->index();
+                $table->string('token', 80)->index();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

@@ -13,14 +13,16 @@ class CreateReferralCodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('referral_codes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('own_code',32)->unique();
-            $table->string('referral_code',32)->nullable();
-            $table->integer('owner_id')->index();
-            $table->integer('referred_user_id')->index()->nullable();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('referral_codes')) {
+            Schema::create('referral_codes', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('own_code', 32)->unique();
+                $table->string('referral_code', 32)->nullable();
+                $table->integer('owner_id')->index();
+                $table->integer('referred_user_id')->index()->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

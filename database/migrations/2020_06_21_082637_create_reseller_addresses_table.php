@@ -13,17 +13,19 @@ class CreateResellerAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('reseller_addresses', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('reseller_id')->index();
-            $table->string('address');
-            $table->string('image');
-            $table->decimal('latitude', 10, 8);
-            $table->decimal('longitude', 11, 8);
-            $table->unsignedInteger('added_by')->index();
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        if (!Schema::hasTable('reseller_addresses')) {
+            Schema::create('reseller_addresses', function (Blueprint $table) {
+                $table->increments('id');
+                $table->unsignedInteger('reseller_id')->index();
+                $table->string('address');
+                $table->string('image');
+                $table->decimal('latitude', 10, 8);
+                $table->decimal('longitude', 11, 8);
+                $table->unsignedInteger('added_by')->index();
+                $table->timestamps();
+                $table->softDeletes();
+            });
+        }
     }
 
     /**

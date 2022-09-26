@@ -13,13 +13,15 @@ class CreateBlockListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('block_lists', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('mobile_no', 32)->index();
-            $table->string('remarks');
-            $table->dateTime('unblock_at');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('block_lists')) {
+            Schema::create('block_lists', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('mobile_no', 32)->index();
+                $table->string('remarks');
+                $table->dateTime('unblock_at');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

@@ -13,12 +13,14 @@ class CreateOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('options', function (Blueprint $table) {
-            $table->bigIncrements('id')->index();
-            $table->bigInteger('reseller_id')->nullable()->index('option_reseller_id');
-            $table->string('label')->index();
-            $table->longText('content')->nullable();
-        });
+        if (!Schema::hasTable('options')) {
+            Schema::create('options', function (Blueprint $table) {
+                $table->bigIncrements('id')->index();
+                $table->bigInteger('reseller_id')->nullable()->index('option_reseller_id');
+                $table->string('label')->index();
+                $table->longText('content')->nullable();
+            });
+        }
     }
 
     /**

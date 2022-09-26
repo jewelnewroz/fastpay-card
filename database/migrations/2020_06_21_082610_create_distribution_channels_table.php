@@ -13,15 +13,17 @@ class CreateDistributionChannelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('distribution_channels', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('parent_id')->index();
-            $table->unsignedInteger('child_id')->index();
-            $table->string('type', 80)->index();
-            $table->boolean('status')->default(1);
-            $table->unsignedInteger('added_by')->index();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('distribution_channels')) {
+            Schema::create('distribution_channels', function (Blueprint $table) {
+                $table->increments('id');
+                $table->unsignedInteger('parent_id')->index();
+                $table->unsignedInteger('child_id')->index();
+                $table->string('type', 80)->index();
+                $table->boolean('status')->default(1);
+                $table->unsignedInteger('added_by')->index();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

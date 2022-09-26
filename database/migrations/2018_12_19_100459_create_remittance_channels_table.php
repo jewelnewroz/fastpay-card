@@ -13,13 +13,15 @@ class CreateRemittanceChannelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('remittance_channels', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name', 64)->unique()->index();
-            $table->string('logo');
-            $table->boolean('status')->default(true);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('remittance_channels')) {
+            Schema::create('remittance_channels', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name', 64)->unique()->index();
+                $table->string('logo');
+                $table->boolean('status')->default(true);
+                $table->timestamps();
+            });
+        }
     }
 
     /**

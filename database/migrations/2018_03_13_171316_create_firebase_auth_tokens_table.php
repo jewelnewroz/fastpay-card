@@ -13,13 +13,15 @@ class CreateFirebaseAuthTokensTable extends Migration
      */
     public function up()
     {
-        Schema::create('firebase_auth_tokens', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('identifier', 120)->index();
-            $table->string('user_uid', 120)->index();
-            $table->boolean('is_user')->default(false);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('firebase_auth_tokens')) {
+            Schema::create('firebase_auth_tokens', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('identifier', 120)->index();
+                $table->string('user_uid', 120)->index();
+                $table->boolean('is_user')->default(false);
+                $table->timestamps();
+            });
+        }
     }
 
     /**

@@ -13,13 +13,15 @@ class CreateAccountReportBreakpoints extends Migration
      */
     public function up()
     {
-        Schema::create('account_report_breakpoints', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('range',32);
-            $table->tinyInteger('status')->default(0);
-            $table->date('report_date');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('account_report_breakpoints')) {
+            Schema::create('account_report_breakpoints', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('range', 32);
+                $table->tinyInteger('status')->default(0);
+                $table->date('report_date');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

@@ -13,17 +13,19 @@ class CreateFeaturePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('feature_permissions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('operator_id')->unsigned()->index();
-            $table->foreign('operator_id')->references('id')->on('operators')->onDelete('cascade');
-            $table->string('feature', 32)->index();
-            $table->integer('assigned_by')->unsigned()->index();
-            $table->foreign('assigned_by')->references('id')->on('users')->onDelete('cascade');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('feature_permissions')) {
+            Schema::create('feature_permissions', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('user_id')->unsigned()->index();
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+                $table->integer('operator_id')->unsigned()->index();
+                $table->foreign('operator_id')->references('id')->on('operators')->onDelete('cascade');
+                $table->string('feature', 32)->index();
+                $table->integer('assigned_by')->unsigned()->index();
+                $table->foreign('assigned_by')->references('id')->on('users')->onDelete('cascade');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

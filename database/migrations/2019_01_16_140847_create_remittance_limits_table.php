@@ -13,16 +13,18 @@ class CreateRemittanceLimitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('remittance_limits', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('remittance_channel_id')->unsigned()->index();
-            $table->foreign('remittance_channel_id')->references('id')->on('remittance_channels')->onDelete('cascade');
-            $table->integer('country_id')->unsigned()->index();
-            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
-            $table->mediumInteger('max_limit')->default(0);
-            $table->boolean('status')->default(true);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('remittance_limits')) {
+            Schema::create('remittance_limits', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('remittance_channel_id')->unsigned()->index();
+                $table->foreign('remittance_channel_id')->references('id')->on('remittance_channels')->onDelete('cascade');
+                $table->integer('country_id')->unsigned()->index();
+                $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
+                $table->mediumInteger('max_limit')->default(0);
+                $table->boolean('status')->default(true);
+                $table->timestamps();
+            });
+        }
     }
 
     /**

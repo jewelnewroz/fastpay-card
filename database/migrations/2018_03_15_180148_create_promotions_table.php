@@ -13,13 +13,15 @@ class CreatePromotionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('promotions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('title', 64)->unique()->index();
-            $table->string('slug', 120)->index(); // Can be useful for multi-lingual promotion title like "newroz_2018" => Newroz 2018
-            $table->boolean('status')->default(true);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('promotions')) {
+            Schema::create('promotions', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('title', 64)->unique()->index();
+                $table->string('slug', 120)->index(); // Can be useful for multi-lingual promotion title like "newroz_2018" => Newroz 2018
+                $table->boolean('status')->default(true);
+                $table->timestamps();
+            });
+        }
     }
 
     /**

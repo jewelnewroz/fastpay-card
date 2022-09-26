@@ -13,14 +13,16 @@ class CreateBanksTable extends Migration
      */
     public function up()
     {
-        Schema::create('banks', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('country_id')->unsigned()->index();
-            $table->foreign('country_id')->references('id')->on('countries');
-            $table->string('name', 64);
-            $table->boolean('status')->default(true);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('banks')) {
+            Schema::create('banks', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('country_id')->unsigned()->index();
+                $table->foreign('country_id')->references('id')->on('countries');
+                $table->string('name', 64);
+                $table->boolean('status')->default(true);
+                $table->timestamps();
+            });
+        }
     }
 
     /**
