@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OperatorCreateRequest;
 use App\Models\OperatorCategory;
-use App\Repositories\Interfaces\OperatorCategoryRepositoryInterface;
 use App\Services\OperatorCategoryService;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
@@ -42,9 +40,9 @@ class OperatorCategoryController extends Controller
         }
     }
 
-    public function show($id): View
+    public function show(OperatorCategory $operatorCategory): View
     {
-        return view('admin.operator.category.edit', compact('operatorCategory'))->with(['title' => 'Update category']);
+        return view('admin.operator.category.edit', compact('operatorCategory'))->with(['title' => 'Show category']);
     }
 
     public function edit(OperatorCategory $operatorCategory): View
