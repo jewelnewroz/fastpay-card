@@ -38,6 +38,9 @@
                                 <div>Logo</div>
                             </th>
                             <th>
+                                <div>Bundle name</div>
+                            </th>
+                            <th>
                                 <div>Operator name</div>
                             </th>
                             <th>

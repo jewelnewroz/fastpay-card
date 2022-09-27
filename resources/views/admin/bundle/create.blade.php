@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label>Operator Name <span class="text-danger">*</span></label>
+                            <label>Bundle Name <span class="text-danger">*</span></label>
                             <input type="text" id="firstName" name="name"
                                    class="form-control @if($errors->has('name')) is-invalid @endif"
                                    value="{{ old('name') }}" placeholder="First name">
@@ -38,32 +38,6 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label>Title <span class="text-danger">*</span></label>
-                            <input type="text" id="title" name="title"
-                                   class="form-control @if($errors->has('title')) is-invalid @endif"
-                                   value="{{ old('title') }}" placeholder="Store">
-                            @if($errors->has('title'))
-                                <div class="invalid-feedback" style="display:block;">
-                                    {{ $errors->first('title') }}
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Store <span class="text-danger">*</span></label>
-                            <input type="text" id="store" name="store"
-                                   class="form-control @if($errors->has('store')) is-invalid @endif"
-                                   value="{{ old('store') }}" placeholder="First name">
-                            @if($errors->has('store'))
-                                <div class="invalid-feedback" style="display:block;">
-                                    {{ $errors->first('store') }}
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
                             <label>Logo <span class="text-danger">*</span></label>
                             <input type="file" class="form-control" placeholder="Select logo">
                             @if($errors->has('logo'))
@@ -84,20 +58,69 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Denomination <span class="text-danger">*</span></label>
+                            <input type="text" name="top_up_profile" class="form-control" placeholder="Denomination ID">
+                            @if($errors->has('top_up_profile'))
+                                <div class="invalid-feedback" style="display:block;">
+                                    {{ $errors->first('top_up_profile') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Price <span class="text-danger">*</span></label>
+                            <input type="number" name="price" class="form-control" placeholder="Price">
+                            @if($errors->has('price'))
+                                <div class="invalid-feedback" style="display:block;">
+                                    {{ $errors->first('price') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <label>Applicable for <span class="text-danger">*</span></label>
-                            <input type="file" name="user_types" class="form-control">
-                            @if($errors->has('user_types'))
+                            <div class="form-group clearfix">
+                                <div class="icheck-primary d-inline">
+                                    <input name="applicable_for" type="checkbox" id="checkboxPrimary2">
+                                    <label for="checkboxPrimary2">
+                                        Reseller
+                                    </label>
+                                </div>
+                                <div class="icheck-primary d-inline">
+                                    <input name="applicable_for" type="checkbox" id="checkboxPrimary3">
+                                    <label for="checkboxPrimary3">
+                                        Dealer
+                                    </label>
+                                </div>
+                            </div>
+                            @if($errors->has('applicable_for'))
                                 <div class="invalid-feedback" style="display:block;">
-                                    {{ $errors->first('user_types') }}
+                                    {{ $errors->first('applicable_for') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Status <span class="text-danger">*</span></label>
+                            <select name="status" class="form-control" placeholder="Status">
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                            @if($errors->has('status'))
+                                <div class="invalid-feedback" style="display:block;">
+                                    {{ $errors->first('status') }}
                                 </div>
                             @endif
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-success pull-right" type="submit">Update</button>
+                    <button class="btn btn-success pull-right" type="submit">Create bundle</button>
                 </div>
             </div>
         </form>

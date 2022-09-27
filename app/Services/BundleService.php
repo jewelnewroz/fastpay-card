@@ -2,8 +2,11 @@
 
 namespace App\Services;
 
+use App\Http\Requests\BundleCreateRequest;
+use App\Http\Requests\BundleUpdateRequest;
 use App\Models\Bundle;
 use App\Repositories\Interfaces\BundleRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -34,5 +37,15 @@ class BundleService
                 return $bundle->nice_status;
             })
             ->toJson();
+    }
+
+    public function create(BundleCreateRequest $request): Model
+    {
+        return $this->bundleRepository->create($request->validated());
+    }
+
+    public function update(BundleUpdateRequest $request, $id)
+    {
+        return $this->bundleRepository->update($request->validated(), $id);
     }
 }
