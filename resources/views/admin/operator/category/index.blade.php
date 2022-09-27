@@ -24,16 +24,16 @@
                     <table class="table table-striped table-bordered" id="dataTable">
                         <thead>
                         <tr>
-                            <th>
+                            <th style="width:40px;">
                                 <div>ID#</div>
                             </th>
                             <th>
-                                <div>Name</div>
+                                <div>Key</div>
                             </th>
                             <th>
                                 <div>Label</div>
                             </th>
-                            <th style="width:40px;v-align:middle;text-align:center;" class="align-middle">
+                            <th style="width:80px;" class="align-middle">
                                 <div>Action</div>
                             </th>
                         </tr>
@@ -87,22 +87,12 @@
                     {"data": "label"},
                     {
                         "mRender": function (data, type, row) {
-                            let str = "<div class='btn-group'> <button class='btn btn-default btn-sm dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fa fa-ellipsis-h' aria-hidden='true'></i></button> <div class='dropdown-menu dropdown-menu-right'> ";
-                            str += "<a href='/dashboard/operator/" + row['id'] + "' class='dropdown-item'><i class='fa fa-eye'></i> View</a> ";
-                            str += "<a href='/dashboard/operator/" + row['id'] + "/edit' class='dropdown-item'><i class='fa fa-edit'></i> Edit</a> ";
-                            if (row['status'] != 'Active') {
-                                str += "<a href='#' class='dropdown-item user-action' data-action='active' data-user-id='" + row['id'] + "'><i class='fa fa-check'></i> Active</a> ";
-                            } else {
-                                str += "<a href='#' class='dropdown-item user-action' data-action='deactive' data-user-id='" + row['id'] + "'><i class='fa fa-ban'></i> Deactive</a> ";
-                            }
-                            str += "</div> </div>";
-
-                            return str;
+                            return "<a href='/dashboard/operator/category/" + row['id'] + "/edit' class='btn btn-default'><i class='fa fa-edit'></i> Edit</a> ";
                         }
                     }
                 ],
                 "columnDefs": [
-                    {"targets": [2], "searchable": false, "orderable": false, "visible": true}
+                    {"targets": [3], "searchable": false, "orderable": false, "visible": true}
                 ],
                 "order": [[0, 'desc']],
                 buttons: {!! json_encode($commonHelper->dataTableButtons(['pdf','print'])) !!},
