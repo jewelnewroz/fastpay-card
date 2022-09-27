@@ -3,9 +3,9 @@
 namespace App\Repositories;
 
 use App\Models\OperatorCategory;
-use App\Repositories\Interfaces\OperatorTypeRepositoryInterface;
+use App\Repositories\Interfaces\OperatorCategoryRepositoryInterface;
 
-class OperatorCategoryRepository extends BaseRepository implements OperatorTypeRepositoryInterface
+class OperatorCategoryRepository extends BaseRepository implements OperatorCategoryRepositoryInterface
 {
     public function __construct(OperatorCategory $model)
     {

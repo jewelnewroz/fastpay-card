@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Helper\CommonHelper;
 use App\Repositories\Interfaces\OperatorCategoryRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 
 class OperatorCategoryService
 {
@@ -16,13 +16,16 @@ class OperatorCategoryService
 
     public function getForDataTable()
     {
-        return datatables()->eloquent($this->operatorCategoryRepository->getModel());
+        return datatables()->eloquent($this->operatorCategoryRepository->getModel()->query());
     }
 
-    public function create(array $data)
+    public function create(array $data): Model
     {
-        return $this->operatorCategoryRepository->create($data + [
-                'calculated_data' => CommonHelper::numberFormat(5.566666)
-            ]);
+        return $this->operatorCategoryRepository->create($data);
+    }
+
+    public function update(array $data, $id)
+    {
+        return $this->operatorCategoryRepository->update($data, $id);
     }
 }

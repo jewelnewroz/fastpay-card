@@ -37,6 +37,12 @@
                                 <p>Operators</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('category.index') }}" class="nav-link @if($current_route_name == 'category.index') active @endif">
+                                <i class="fa fa-code-branch nav-icon"></i>
+                                <p>Categories</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 

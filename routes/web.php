@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\BundleController;
+use App\Http\Controllers\Dashboard\OperatorCategoryController;
 use App\Http\Controllers\Dashboard\OperatorController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\DashboardController;
@@ -26,6 +27,9 @@ Route::get('/', [FrontendController::class, 'index']);
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
+    Route::group(['prefix' => 'operator'], function(){
+        Route::resource('category', OperatorCategoryController::class)->except(['destroy']);
+    });
     Route::resource('operator', OperatorController::class);
     Route::resource('bundle', BundleController::class);
     Route::resource('transaction', TransactionController::class)->only('index');
