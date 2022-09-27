@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\View\Composers\GatewayComposer;
+use App\Http\View\Composers\OperatorCategoryComposer;
 use App\Http\View\Composers\OperatorComposer;
 use App\Http\View\Composers\PathComposer;
 use App\Http\View\Composers\PermissionComposer;
@@ -44,6 +45,11 @@ class ViewServiceProvider extends ServiceProvider
         View::composer([
             'admin.transaction.index'
         ], TransactionTypeComposer::class);
+
+        View::composer([
+            'admin.operator.create',
+            'admin.operator.edit'
+        ], OperatorCategoryComposer::class);
     }
 
     public function boot()

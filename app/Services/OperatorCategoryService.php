@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\Interfaces\OperatorCategoryRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class OperatorCategoryService
 {
@@ -12,6 +13,13 @@ class OperatorCategoryService
     public function __construct(OperatorCategoryRepositoryInterface $operatorCategoryRepository)
     {
         $this->operatorCategoryRepository = $operatorCategoryRepository;
+    }
+
+    public function all()
+    {
+        return Cache::rememberForever('categories', function () {
+            return $this->operatorCategoryRepository->all();
+        });
     }
 
     public function getForDataTable()
