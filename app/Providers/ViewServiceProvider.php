@@ -23,7 +23,9 @@ class ViewServiceProvider extends ServiceProvider
             [
                 'admin.user.index',
                 'admin.user.create',
-                'admin.user.edit'
+                'admin.user.edit',
+                'admin.operator.create',
+                'admin.operator.edit'
             ], RoleComposer::class
         );
         View::composer(
