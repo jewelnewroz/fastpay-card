@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\OperatorCreateRequest;
 use App\Http\Requests\OperatorUpdateRequest;
 use App\Models\Operator;
+use App\Services\MediaService;
 use App\Services\OperatorService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,10 +16,12 @@ use Illuminate\Support\Facades\Log;
 class OperatorController extends Controller
 {
     private OperatorService $operatorService;
+    private MediaService $mediaService;
 
-    public function __construct(OperatorService $operatorService)
+    public function __construct(OperatorService $operatorService, MediaService $mediaService)
     {
         $this->operatorService = $operatorService;
+        $this->mediaService = $mediaService;
     }
 
     public function index(Request $request)
@@ -37,7 +40,9 @@ class OperatorController extends Controller
     public function store(OperatorCreateRequest $request): RedirectResponse
     {
         try {
-            if($this->operatorService->create($request)) {
+            if($operator = $this->operatorService->create($request)) {
+                $media = $this->mediaService->upload($request->file('attachment'));
+                $operator->update(['pos_logo' => $media->attachment, 'logo' => $media->attachment]);
                 return redirect()->route('operator.index')->with(ResponseHelper::success(__('Operator successfully created')));
             }
         } catch (\Exception $exception) {

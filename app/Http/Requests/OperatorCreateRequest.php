@@ -17,12 +17,12 @@ class OperatorCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|unique:operators,name',
-            'title' => 'required|string',
-            'store' => 'required|numeric',
-            'logo' => 'required|file|mimes:jpg,jpeg,png',
-            'pos_logo' => 'required|file|mimes:jpg,jpeg,png',
-            'user_types' => 'required|array'
+            'name' => 'required|string',
+            'attachment' => 'required|file|mimes:jpg,jpeg,png',
+            'category' => 'required|string',
+            'gateway' => 'required|exists:gateways,name',
+            'position' => 'required|integer',
+            'status' => 'required|integer|in:1,0'
         ];
     }
 }

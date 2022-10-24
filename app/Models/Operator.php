@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Operator extends Model
 {
     protected $casts = ['eligibility' => 'array'];
+    protected $fillable = ['name', 'logo', 'type', 'gateway', 'position', 'status'];
 
     public function bundles(): HasMany
     {

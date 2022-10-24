@@ -3,7 +3,7 @@
 @section('content')
 
     <article class="content items-list-page">
-        <form name="item" id="customerForm" action="{{ route('operator.store')}}" method="POST">
+        <form name="item" id="customerForm" action="{{ route('operator.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body" style="border:1px solid #eee;">
                 <div class="row">
@@ -21,20 +21,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Logo <span class="text-danger">*</span></label>
-                            <input type="file" class="form-control" placeholder="Select logo">
-                            @if($errors->has('logo'))
+                            <label>Logo  (for POS)<span class="text-danger">*</span></label>
+                            <input type="file" name="attachment" class="form-control" placeholder="Select logo">
+                            @if($errors->has('attachment'))
                                 <div class="invalid-feedback" style="display:block;">
-                                    {{ $errors->first('logo') }}
+                                    {{ $errors->first('attachment') }}
                                 </div>
                             @endif
                         </div>
                         <div class="form-group">
                             <label>Category <span class="text-danger">*</span></label>
-                            <select class="form-control" name="gateway" required>
+                            <select class="form-control" name="category" required>
                                 <option value="">Select category</option>
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->name }}">{{ $category->label }}</option>
+                                    <option value="{{ $category->name }}" @if(old('category') == $category->name) selected @endif>{{ $category->label }}</option>
                                 @endforeach
                             </select>
                             @if($errors->has('category'))
@@ -48,7 +48,7 @@
                             <select class="form-control" name="gateway" required>
                                 <option value="">Select gateway</option>
                                 @foreach($gateways as $gateway)
-                                    <option value="{{ $gateway->name }}">{{ $gateway->label }}</option>
+                                    <option value="{{ $gateway->name }}" @if(old('gateway') == $gateway->name) selected @endif>{{ $gateway->label }}</option>
                                 @endforeach
                             </select>
                             @if($errors->has('gateway'))
