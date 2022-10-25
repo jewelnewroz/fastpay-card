@@ -41,6 +41,11 @@ class CommonHelper
         return config('common.customer.statuses')[$status];
     }
 
+    public static function purseGateway($gateway)
+    {
+        return str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $gateway)));
+    }
+
     protected function ceil($number)
     {
         return ceil($number);

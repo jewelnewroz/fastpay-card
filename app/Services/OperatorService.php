@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use App\Helper\CommonHelper;
+use App\Http\Requests\OperatorCreateRequest;
+use App\Http\Requests\OperatorUpdateRequest;
 use App\Models\Operator;
 use App\Repositories\Interfaces\OperatorRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
@@ -33,6 +36,9 @@ class OperatorService
             ->addColumn('status', function (Operator $operator) {
                 return $operator->nice_status;
             })
+            ->addColumn('gateway', function (Operator $operator) {
+                return CommonHelper::purseGateway($operator->gateway);
+            })
             ->toJson();
     }
 
@@ -41,8 +47,13 @@ class OperatorService
         return $this->operatorRepository->all();
     }
 
-    public function create($request): Model
+    public function create(OperatorCreateRequest $request): Model
     {
         return $this->operatorRepository->create($request->validated());
+    }
+
+    public function update(OperatorUpdateRequest $request, $id)
+    {
+        return $this->operatorRepository->update($request->validated(), $id);
     }
 }

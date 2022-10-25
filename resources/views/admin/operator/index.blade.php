@@ -38,16 +38,13 @@
                                 <div>Operator name</div>
                             </th>
                             <th>
-                                <div>Store</div>
+                                <div>Gateway</div>
                             </th>
                             <th>
                                 <div>Type</div>
                             </th>
                             <th>
                                 <div>Position</div>
-                            </th>
-                            <th>
-                                <div>Eligible for</div>
                             </th>
                             <th>
                                 <div>Status</div>
@@ -115,20 +112,9 @@
                         }
                     },
                     {"data": "name"},
-                    {"data": "store"},
-                    {"data": "active_system"},
+                    {"data": "gateway"},
+                    {"data": "category"},
                     {"data": "position"},
-                    {
-                        "mRender": function (data, type, row) {
-                            let str = '';
-                            if (row['eligibility'].length > 0) {
-                                for (let i = 0; i < row['eligibility'].length; i++) {
-                                    str += '<span class="badge badge-primary">' + row['eligibility'][i] + '</span> ';
-                                }
-                            }
-                            return str;
-                        }
-                    },
                     {"data": "status"},
                     {"data": "created_at"},
                     {
