@@ -69,6 +69,7 @@ class OperatorController extends Controller
                 return redirect()->route('operator.index')->with(ResponseHelper::success(__('Operator successfully updated')));
             }
         } catch (\Exception $exception) {
+            dd($exception);
             Log::error('User Create ' . $exception);
         }
 

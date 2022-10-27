@@ -132,8 +132,8 @@
                     {
                         "mRender": function (data, type, row) {
                             let str = "<div class='btn-group'> <button class='btn btn-default btn-sm dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><i class='fa fa-ellipsis-h' aria-hidden='true'></i></button> <div class='dropdown-menu dropdown-menu-right'> ";
-                            str += "<a href='/dashboard/operator/" + row['id'] + "' class='dropdown-item'><i class='fa fa-eye'></i> View</a> ";
-                            str += "<a href='/dashboard/operator/" + row['id'] + "/edit' class='dropdown-item'><i class='fa fa-edit'></i> Edit</a> ";
+                            str += "<a href='/dashboard/bundle/" + row['id'] + "' class='dropdown-item'><i class='fa fa-eye'></i> View</a> ";
+                            str += "<a href='/dashboard/bundle/" + row['id'] + "/edit' class='dropdown-item'><i class='fa fa-edit'></i> Edit</a> ";
                             if (row['status'] != 'Active') {
                                 str += "<a href='#' class='dropdown-item user-action' data-action='active' data-user-id='" + row['id'] + "'><i class='fa fa-check'></i> Active</a> ";
                             } else {

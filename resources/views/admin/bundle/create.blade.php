@@ -1,32 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-
     <article class="content items-list-page">
         <form name="item" id="customerForm" action="{{ route('bundle.store')}}" method="POST">
             @csrf
             <div class="card-body" style="border:1px solid #eee;">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Bundle Name <span class="text-danger">*</span></label>
-                            <input type="text" id="firstName" name="name"
-                                   class="form-control @if($errors->has('name')) is-invalid @endif"
-                                   value="{{ old('name') }}" placeholder="First name">
-                            @if($errors->has('name'))
-                                <div class="invalid-feedback" style="display:block;">
-                                    {{ $errors->first('name') }}
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Operator <span class="text-danger">*</span></label>
                             <select class="form-control" name="operator_id" required>
                                 <option value="">Select operator</option>
                                 @foreach($operators as $operator)
-                                    <option value="{{ $operator->id }}">{{ $operator->name }}</option>
+                                    <option value="{{ $operator->id }}" @if(old('operator_id') == $operator->id) selected @endif>{{ $operator->name }}</option>
                                 @endforeach
                             </select>
                             @if($errors->has('operator_id'))
@@ -36,10 +22,27 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Bundle Name <span class="text-danger">*</span></label>
+                            <input type="text" id="firstName" name="name"
+                                   class="form-control @if($errors->has('name')) is-invalid @endif"
+                                   value="{{ old('name') }}" placeholder="First name" required>
+                            @if($errors->has('name'))
+                                <div class="invalid-feedback" style="display:block;">
+                                    {{ $errors->first('name') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Logo <span class="text-danger">*</span></label>
-                            <input type="file" class="form-control" placeholder="Select logo">
+                            <input type="file" class="form-control" placeholder="Select logo" required>
                             @if($errors->has('logo'))
                                 <div class="invalid-feedback" style="display:block;">
                                     {{ $errors->first('logo') }}
@@ -47,21 +50,12 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>POS Logo <span class="text-danger">*</span></label>
-                            <input type="file" name="pos_logo" class="form-control" placeholder="Select logo">
-                            @if($errors->has('pos_logo'))
-                                <div class="invalid-feedback" style="display:block;">
-                                    {{ $errors->first('pos_logo') }}
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Denomination <span class="text-danger">*</span></label>
-                            <input type="text" name="top_up_profile" class="form-control" placeholder="Denomination ID">
+                            <input type="text" name="top_up_profile" value="{{ old('top_up_profile') }}" class="form-control" placeholder="Denomination ID">
                             @if($errors->has('top_up_profile'))
                                 <div class="invalid-feedback" style="display:block;">
                                     {{ $errors->first('top_up_profile') }}
@@ -69,10 +63,12 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Price <span class="text-danger">*</span></label>
-                            <input type="number" name="price" class="form-control" placeholder="Price">
+                            <input type="number" name="price" value="{{ old('price') }}" class="form-control" placeholder="Price" required>
                             @if($errors->has('price'))
                                 <div class="invalid-feedback" style="display:block;">
                                     {{ $errors->first('price') }}
@@ -80,36 +76,59 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="form-group">
-                            <label>Applicable for <span class="text-danger">*</span></label>
-                            <div class="form-group clearfix">
-                                <div class="icheck-primary d-inline">
-                                    <input name="applicable_for" type="checkbox" id="checkboxPrimary2">
-                                    <label for="checkboxPrimary2">
-                                        Reseller
-                                    </label>
-                                </div>
-                                <div class="icheck-primary d-inline">
-                                    <input name="applicable_for" type="checkbox" id="checkboxPrimary3">
-                                    <label for="checkboxPrimary3">
-                                        Dealer
-                                    </label>
-                                </div>
+                            <label>Validity <span class="text-danger">*</span></label>
+                            <div class="form-group">
+                                <input type="text" name="validity" value="{{ old('validity') }}" class="form-control" placeholder="Validity" required>
                             </div>
-                            @if($errors->has('applicable_for'))
+                            @if($errors->has('validity'))
                                 <div class="invalid-feedback" style="display:block;">
-                                    {{ $errors->first('applicable_for') }}
+                                    {{ $errors->first('validity') }}
                                 </div>
                             @endif
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>BarCode <span class="text-danger">*</span></label>
+                            <div class="form-group">
+                                <input type="text" name="barcode" value="{{ old('barcode') }}" class="form-control" placeholder="Bar code" required>
+                            </div>
+                            @if($errors->has('barcode'))
+                                <div class="invalid-feedback" style="display:block;">
+                                    {{ $errors->first('barcode') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Position <span class="text-danger">*</span></label>
+                            <div class="form-group">
+                                <input type="text" name="position" value="{{ old('position') }}" class="form-control" value="99" placeholder="Position">
+                            </div>
+                            @if($errors->has('position'))
+                                <div class="invalid-feedback" style="display:block;">
+                                    {{ $errors->first('position') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Status <span class="text-danger">*</span></label>
-                            <select name="status" class="form-control" placeholder="Status">
-                                <option value="1">Active</option>
-                                <option value="0">Inactive</option>
+                            <select name="status" class="form-control" placeholder="Status" required>
+                                <option value="1" @if(old('status') == '1') selected @endif>Active</option>
+                                <option value="0" @if(old('status') == '0') selected @endif>Inactive</option>
                             </select>
                             @if($errors->has('status'))
                                 <div class="invalid-feedback" style="display:block;">
