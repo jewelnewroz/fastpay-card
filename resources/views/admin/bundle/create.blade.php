@@ -2,7 +2,7 @@
 
 @section('content')
     <article class="content items-list-page">
-        <form name="item" id="customerForm" action="{{ route('bundle.store')}}" method="POST">
+        <form name="item" id="customerForm" action="{{ route('bundle.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body" style="border:1px solid #eee;">
                 <div class="row">
@@ -42,7 +42,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Logo <span class="text-danger">*</span></label>
-                            <input type="file" class="form-control" placeholder="Select logo" required>
+                            <input type="file" name="attachment" class="form-control" placeholder="Select logo" required>
                             @if($errors->has('logo'))
                                 <div class="invalid-feedback" style="display:block;">
                                     {{ $errors->first('logo') }}
@@ -54,7 +54,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Denomination <span class="text-danger">*</span></label>
+                            <label>Denomination (Top up Profile) <span class="text-danger">*</span></label>
                             <input type="text" name="top_up_profile" value="{{ old('top_up_profile') }}" class="form-control" placeholder="Denomination ID">
                             @if($errors->has('top_up_profile'))
                                 <div class="invalid-feedback" style="display:block;">
@@ -87,21 +87,6 @@
                             @if($errors->has('validity'))
                                 <div class="invalid-feedback" style="display:block;">
                                     {{ $errors->first('validity') }}
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>BarCode <span class="text-danger">*</span></label>
-                            <div class="form-group">
-                                <input type="text" name="barcode" value="{{ old('barcode') }}" class="form-control" placeholder="Bar code" required>
-                            </div>
-                            @if($errors->has('barcode'))
-                                <div class="invalid-feedback" style="display:block;">
-                                    {{ $errors->first('barcode') }}
                                 </div>
                             @endif
                         </div>

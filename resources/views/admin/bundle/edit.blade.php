@@ -2,8 +2,9 @@
 
 @section('content')
     <article class="content items-list-page">
-        <form name="item" id="customerForm" action="{{ route('bundle.store')}}" method="POST">
+        <form name="item" id="customerForm" action="{{ route('bundle.update', $bundle->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="card-body" style="border:1px solid #eee;">
                 <div class="row">
                     <div class="col-md-6">
@@ -42,7 +43,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Logo <span class="text-danger">*</span></label>
-                            <input type="file" class="form-control" placeholder="Select logo" required>
+                            <input type="file" name="attachment" class="form-control" placeholder="Select logo">
                             @if($errors->has('logo'))
                                 <div class="invalid-feedback" style="display:block;">
                                     {{ $errors->first('logo') }}
@@ -87,21 +88,6 @@
                             @if($errors->has('validity'))
                                 <div class="invalid-feedback" style="display:block;">
                                     {{ $errors->first('validity') }}
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>BarCode <span class="text-danger">*</span></label>
-                            <div class="form-group">
-                                <input type="text" name="barcode" value="{{ old('bar_code', $bundle->bar_code) }}" class="form-control" placeholder="Bar code" required>
-                            </div>
-                            @if($errors->has('barcode'))
-                                <div class="invalid-feedback" style="display:block;">
-                                    {{ $errors->first('barcode') }}
                                 </div>
                             @endif
                         </div>

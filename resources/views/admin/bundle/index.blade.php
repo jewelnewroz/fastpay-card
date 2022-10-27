@@ -44,10 +44,10 @@
                                 <div>Operator name</div>
                             </th>
                             <th>
-                                <div>Eligible for</div>
+                                <div>Price</div>
                             </th>
                             <th>
-                                <div>Price</div>
+                                <div>Validity</div>
                             </th>
                             <th>
                                 <div>Status</div>
@@ -115,18 +115,8 @@
                     },
                     {"data": "name"},
                     {"data": "operator.name"},
-                    {
-                        "mRender": function (data, type, row) {
-                            let str = '';
-                            if (row['eligibility'].length > 0) {
-                                for (let i = 0; i < row['eligibility'].length; i++) {
-                                    str += '<span class="badge badge-primary">' + row['eligibility'][i] + '</span> ';
-                                }
-                            }
-                            return str;
-                        }
-                    },
                     {"data": "price"},
+                    {"data": "validity"},
                     {"data": "status"},
                     {"data": "created_at"},
                     {
