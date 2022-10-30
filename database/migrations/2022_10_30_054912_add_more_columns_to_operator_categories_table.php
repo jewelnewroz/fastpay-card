@@ -16,7 +16,7 @@ class AddMoreColumnsToOperatorCategoriesTable extends Migration
         Schema::table('operator_categories', function (Blueprint $table) {
             $table->string('icon')->nullable();
             $table->tinyInteger('position_number')->default(99);
-            $table->softDeletesTz();
+            $table->tinyInteger('status')->default(1);
         });
     }
 

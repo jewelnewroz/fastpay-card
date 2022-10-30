@@ -33,6 +33,12 @@
                             <th>
                                 <div>Label</div>
                             </th>
+                            <th>
+                                <div>Position</div>
+                            </th>
+                            <th>
+                                <div>Status</div>
+                            </th>
                             <th style="width:80px;" class="align-middle">
                                 <div>Action</div>
                             </th>
@@ -89,6 +95,8 @@
                     },
                     {"data": "name"},
                     {"data": "label"},
+                    {"data": "position_number"},
+                    {"data": "status"},
                     {
                         "mRender": function (data, type, row) {
                             return "<a href='/dashboard/operator/category/" + row['id'] + "/edit' class='btn btn-default'><i class='fa fa-edit'></i> Edit</a> ";
@@ -96,9 +104,9 @@
                     }
                 ],
                 "columnDefs": [
-                    {"targets": [3], "searchable": false, "orderable": false, "visible": true}
+                    {"targets": [5], "searchable": false, "orderable": false, "visible": true}
                 ],
-                "order": [[0, 'desc']],
+                "order": [[1, 'ASC']],
                 buttons: {!! json_encode($commonHelper->dataTableButtons(['pdf','print'])) !!},
             });
 

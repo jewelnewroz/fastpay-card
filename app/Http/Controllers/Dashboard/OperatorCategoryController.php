@@ -28,7 +28,11 @@ class OperatorCategoryController extends Controller
     public function index(Request $request)
     {
         if($request->ajax() || $request->wantsJson()) {
-            return $this->operatorCategoryService->getForDataTable()->toJson();
+            return $this->operatorCategoryService->getForDataTable()
+                ->addColumn('status', function (OperatorCategory $category) {
+                    return $category->nice_status;
+                })
+                ->toJson();
         }
         return view('admin.operator.category.index')->with(['title' => 'Categories']);
     }

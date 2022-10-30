@@ -67,6 +67,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Status <span class="text-danger">*</span></label>
+                            <select id="status" name="status" class="form-control @if($errors->has('status')) is-invalid @endif">
+                                <option value="1" @if(old('status', $category->status) == '1') selected @endif>Active</option>
+                                <option value="0" @if(old('status', $category->status) == '0') selected @endif>Inactive</option>
+                            </select>
+                            @if($errors->has('status'))
+                                <div class="invalid-feedback" style="display:block;">
+                                    {{ $errors->first('status') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
                 <div class="card-footer">
                     <button class="btn btn-success pull-right" type="submit">Save</button>
                 </div>
