@@ -11,6 +11,7 @@ class GatewaySeeder extends Seeder
     {
         $gateways = [
             ['name' => 'own_card', 'label' => 'Own Card'],
+            ['name' => 'fast_pay_stock', 'label' => 'FastPay Stock'],
             ['name' => 'FTTH', 'label' => 'FTTH'],
             ['name' => 'FTTH_Special', 'label' => 'FTTH Special'],
             ['name' => 'fast_link', 'label' => 'Fastlink'],
