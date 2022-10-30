@@ -13,16 +13,15 @@ class MediaService
     public function __construct(MediaRepositoryInterface $repository)
     {
         $this->repository = $repository;
-        $this->dir = 'uploads/files/' . date('Y') . '/' . date('m');
+        $this->dir = 'uploads/' . date('Y') . '/' . date('m');
     }
 
     public function upload($file): ?Model
     {
         if($file) {
-            $imageName = time() . '.' . $file->extension();
-            $file->storeAs(public_path($this->dir), $imageName);
+            $path = $file->store($this->dir, 'public');
             return $this->repository->create([
-                'attachment' => $this->dir . '/' . $imageName,
+                'attachment' => 'storage/' . $path,
                 'extension' => $file->extension()
             ]);
         }
