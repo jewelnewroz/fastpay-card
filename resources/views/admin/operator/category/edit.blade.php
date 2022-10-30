@@ -8,7 +8,7 @@
             @method('PUT')
             <div class="card-body" style="border:1px solid #eee;">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Name (Key) <span class="text-danger">*</span></label>
                             <input type="text" id="name" name="name"
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Label <span class="text-danger">*</span></label>
                             <input type="text" id="label" name="label"
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Icon <span class="text-danger">*</span></label>
                             <input type="file" id="label" name="attachment"
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label>Position <span class="text-danger">*</span></label>
                             <input type="number" id="label" name="position_number"

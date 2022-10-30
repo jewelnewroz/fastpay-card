@@ -42,7 +42,7 @@ class OperatorCategoryController extends Controller
     {
         try {
             $category = $this->operatorCategoryService->create($request->validated());
-            if($request->filled('attachment')) {
+            if($request->hasFile('attachment')) {
                 if($media = $this->mediaService->upload($request->file('attachment'))) {
                     $category->update(['icon' => $media->attachment]);
                 }
@@ -68,7 +68,7 @@ class OperatorCategoryController extends Controller
     {
         try {
             $this->operatorCategoryService->update($request->validated(), $category->id);
-            if($request->filled('attachment')) {
+            if($request->hasFile('attachment')) {
                 if($media = $this->mediaService->upload($request->file('attachment'))) {
                     $category->update(['icon' => $media->attachment]);
                 }

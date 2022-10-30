@@ -25,7 +25,7 @@
                         <thead>
                         <tr>
                             <th style="width:40px;">
-                                <div>ID#</div>
+                                <div>Icon</div>
                             </th>
                             <th>
                                 <div>Key</div>
@@ -82,7 +82,11 @@
                 "searching": false,
                 saveState: true,
                 "columns": [
-                    {"data": "id"},
+                    {
+                        "mRender": function (data, type, row) {
+                            return "<img src='/" + row['icon'] + "' class='table-avatar'>";
+                        }
+                    },
                     {"data": "name"},
                     {"data": "label"},
                     {
