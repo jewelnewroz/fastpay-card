@@ -7,6 +7,7 @@ use App\Http\Requests\OperatorCategoryCreateRequest;
 use App\Http\Requests\OperatorCategoryUpdateRequest;
 use App\Http\Requests\OperatorCreateRequest;
 use App\Models\OperatorCategory;
+use App\Services\MediaService;
 use App\Services\OperatorCategoryService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -16,9 +17,12 @@ use Illuminate\View\View;
 class OperatorCategoryController extends Controller
 {
     private OperatorCategoryService $operatorCategoryService;
-    public function __construct(OperatorCategoryService $operatorCategoryService)
+    private MediaService $mediaService;
+
+    public function __construct(OperatorCategoryService $operatorCategoryService, MediaService $mediaService)
     {
         $this->operatorCategoryService = $operatorCategoryService;
+        $this->mediaService = $mediaService;
     }
 
     public function index(Request $request)
@@ -34,10 +38,15 @@ class OperatorCategoryController extends Controller
         return view('admin.operator.category.create')->with(['title' => 'Add new category']);
     }
 
-    public function store(OperatorCategoryCreateRequest $request)
+    public function store(OperatorCategoryCreateRequest $request): RedirectResponse
     {
         try {
-            $this->operatorCategoryService->create($request->validated());
+            $category = $this->operatorCategoryService->create($request->validated());
+            if($request->filled('attachment')) {
+                if($media = $this->mediaService->upload($request->file('attachment'))) {
+                    $category->update(['icon' => $media->attachment]);
+                }
+            }
             return redirect()->route('category.index');
         } catch (\Exception $exception) {
             Log::error("Category create " . $exception);
@@ -55,10 +64,15 @@ class OperatorCategoryController extends Controller
         return view('admin.operator.category.edit', compact('category'))->with(['title' => 'Update category']);
     }
 
-    public function update(OperatorCategoryUpdateRequest $request, $id): RedirectResponse
+    public function update(OperatorCategoryUpdateRequest $request, OperatorCategory $category): RedirectResponse
     {
         try {
-            $this->operatorCategoryService->update($request->validated(), $id);
+            $this->operatorCategoryService->update($request->validated(), $category->id);
+            if($request->filled('attachment')) {
+                if($media = $this->mediaService->upload($request->file('attachment'))) {
+                    $category->update(['icon' => $media->attachment]);
+                }
+            }
             return redirect()->route('category.index');
         } catch (\Exception $exception) {
             Log::error("Category Update " . $exception);

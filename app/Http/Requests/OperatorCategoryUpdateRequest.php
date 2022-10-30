@@ -15,7 +15,9 @@ class OperatorCategoryUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string|unique:operator_categories,name,' . $this->category,
-            'label' => 'required|string'
+            'label' => 'required|string',
+            'attachment' => 'nullable|file|mimes:jpg,jpeg,png',
+            'position_number' => 'required|numeric'
         ];
     }
 }

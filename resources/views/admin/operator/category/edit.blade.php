@@ -3,7 +3,7 @@
 @section('content')
 
     <article class="content items-list-page">
-        <form name="item" id="customerForm" action="{{ route('category.update', $category)}}" method="POST">
+        <form name="item" id="customerForm" action="{{ route('category.update', $category->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="card-body" style="border:1px solid #eee;">
@@ -21,6 +21,8 @@
                             @endif
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Label <span class="text-danger">*</span></label>
@@ -30,6 +32,36 @@
                             @if($errors->has('label'))
                                 <div class="invalid-feedback" style="display:block;">
                                     {{ $errors->first('label') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Icon <span class="text-danger">*</span></label>
+                            <input type="file" id="label" name="attachment"
+                                   class="form-control @if($errors->has('attachment')) is-invalid @endif"
+                                   value="{{ old('attachment') }}" placeholder="Label">
+                            @if($errors->has('attachment'))
+                                <div class="invalid-feedback" style="display:block;">
+                                    {{ $errors->first('attachment') }}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Position <span class="text-danger">*</span></label>
+                            <input type="number" id="label" name="position_number"
+                                   class="form-control @if($errors->has('position_number')) is-invalid @endif"
+                                   value="{{ old('position_number', $category->position_number) }}">
+                            @if($errors->has('position_number'))
+                                <div class="invalid-feedback" style="display:block;">
+                                    {{ $errors->first('position_number') }}
                                 </div>
                             @endif
                         </div>

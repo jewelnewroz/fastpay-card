@@ -15,7 +15,9 @@ class OperatorCategoryCreateRequest extends FormRequest
     {
         return [
             'name' => 'required|string|unique:operator_categories,name',
-            'label' => 'required|string'
+            'label' => 'required|string',
+            'attachment' => 'nullable|file|mimes:jpg,jpeg,png',
+            'position_number' => 'required|numeric'
         ];
     }
 }
