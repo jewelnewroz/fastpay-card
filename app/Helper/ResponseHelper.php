@@ -4,11 +4,12 @@ namespace App\Helper;
 
 class ResponseHelper
 {
-    public static function success($message = null): array
+    public static function success($message = null, $data = null): array
     {
         return [
             'status' => true,
-            'message' => $message ?? __('Success')
+            'message' => $message ?? __('Success'),
+            'data' => $data
         ];
     }
 
