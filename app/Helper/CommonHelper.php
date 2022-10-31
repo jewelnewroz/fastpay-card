@@ -46,6 +46,11 @@ class CommonHelper
         return str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $gateway)));
     }
 
+    public static function generateOtp(): int
+    {
+        return mt_rand(111111, 999999);
+    }
+
     protected function ceil($number)
     {
         return ceil($number);

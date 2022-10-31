@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Helper\CommonHelper;
 use App\Helper\ResponseHelper;
 use App\Http\Requests\API\V1\LoginRequest;
 use App\Models\User;
@@ -27,7 +28,7 @@ class AuthService
                 throw new \Exception('Invalid login credentials.', 422);
             }
 
-
+            $user->sendOtp(CommonHelper::generateOtp());
 
             return response()->json(ResponseHelper::success('Account found, please verify OTP'));
         } catch (\Exception $exception) {

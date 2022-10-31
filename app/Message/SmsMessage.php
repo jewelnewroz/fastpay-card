@@ -21,15 +21,8 @@ class SmsMessage
         return $this;
     }
 
-    /**
-     * @throws Exception
-     */
     public function send()
     {
-        if (!$this->to || !count($this->lines)) {
-            throw new Exception('SMS not correct.');
-        }
-
         SmsHelper::send(['mobile' => $this->to, 'message' => collect($this->lines)->join("\n", "")]);
     }
 }

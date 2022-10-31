@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Channels\SmsChannel;
+use App\Notifications\OtpNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -52,5 +54,11 @@ class User extends Authenticatable
     public function getNiceStatusAttribute()
     {
         return config('common.user.statuses')[$this->status];
+    }
+
+    public function sendOtp($otp)
+    {
+        $otp = Otp::create(['user_id' => $this->id, 'otp' => $otp]);
+        $this->notify(new OtpNotification($otp, [SmsChannel::class]));
     }
 }
