@@ -56,9 +56,24 @@ class User extends Authenticatable
         return config('common.user.statuses')[$this->status];
     }
 
+    public function loginData(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'mobile' => $this->mobile_no,
+            'status' => $this->status
+        ];
+    }
+
     public function sendOtp($otp)
     {
-        $otp = Otp::updateOrCreate(['user_id' => $this->id], ['otp' => $otp, 'updated_at' => now()]);
+        $otp = Otp::updateOrCreate(['user_id' => $this->id], ['mobile' => $this->mobile_no, 'otp' => $otp, 'updated_at' => now()]);
         $this->notify(new OtpNotification($otp, [SmsChannel::class]));
+    }
+
+    public function invalidOtp()
+    {
+        Otp::updateOrCreate(['user_id' => $this->id], ['updated_at' => now()->subMinutes(15)]);
     }
 }

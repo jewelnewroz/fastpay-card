@@ -5,10 +5,12 @@ namespace App\Services;
 use App\Helper\CommonHelper;
 use App\Helper\ResponseHelper;
 use App\Http\Requests\API\V1\LoginRequest;
+use App\Http\Requests\API\V1\LoginVerifyRequest;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthService
@@ -32,8 +34,23 @@ class AuthService
             $user->sendOtp(CommonHelper::generateOtp());
 
             return response()->json(ResponseHelper::success('Account found, please verify OTP'));
-        } catch (ThrottleRequestsException $exception) {
-            return response()->json(ResponseHelper::failed('Too many login attempts'));
+        } catch (\Exception $exception) {
+            return response()->json(ResponseHelper::failed('Server error'));
+        }
+    }
+
+    public function verifyLoginOtp(LoginVerifyRequest $request): JsonResponse
+    {
+        try {
+            $user = $this->userRepository->getModel()->where('mobile_no', $request->input('mobile'))->first();
+            if(!Auth::loginUsingId($user->id)) {
+                throw new \Exception('Cannot log in', 422);
+            }
+            $user->invalidOtp();
+            return response()->json(ResponseHelper::success('Account found, please verify OTP', [
+                'user' => $user->loginData(),
+                'token' => $user->createToken('authToken')->accessToken
+            ]));
         } catch (\Exception $exception) {
             return response()->json(ResponseHelper::failed('Server error'));
         }

@@ -36,8 +36,8 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e, $request) {
-            if($request->is('api/*')) {
+        $this->reportable(function (Throwable $e) {
+            if(request()->is('api/*')) {
                 return response()->json(ResponseHelper::failed('Server error!'));
             }
         });
