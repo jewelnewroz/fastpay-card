@@ -3,7 +3,7 @@
 use App\Http\Controllers\API\V1\ApiAuthController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'auth', 'middleware' => 'guest'], function() {
+Route::group(['prefix' => 'auth', 'middleware' => ['guest', 'throttle:5,1']], function() {
     Route::post('login', [ApiAuthController::class, 'login']);
 });
 

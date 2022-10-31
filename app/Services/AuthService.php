@@ -7,6 +7,7 @@ use App\Helper\ResponseHelper;
 use App\Http\Requests\API\V1\LoginRequest;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 
@@ -24,15 +25,16 @@ class AuthService
         try {
             $user = $this->userRepository->getModel()->where('mobile_no', $request->input('mobile'))->first();
 
-            if(!$user || !Hash::check($request->input('password'), $user->password)) {
+            if (!$user || !Hash::check($request->input('password'), $user->password)) {
                 return response()->json(ResponseHelper::failed('Invalid login credentials.'));
             }
 
             $user->sendOtp(CommonHelper::generateOtp());
 
             return response()->json(ResponseHelper::success('Account found, please verify OTP'));
+        } catch (ThrottleRequestsException $exception) {
+            return response()->json(ResponseHelper::failed('Too many login attempts'));
         } catch (\Exception $exception) {
-            dd($exception);
             return response()->json(ResponseHelper::failed('Server error'));
         }
     }

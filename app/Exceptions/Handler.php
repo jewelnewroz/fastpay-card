@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use App\Helper\ResponseHelper;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -13,7 +15,7 @@ class Handler extends ExceptionHandler
      * @var array<int, class-string<Throwable>>
      */
     protected $dontReport = [
-        //
+        ThrottleRequestsException::class
     ];
 
     /**
@@ -34,8 +36,16 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->reportable(function (Throwable $e, $request) {
+            if($request->is('api/*')) {
+                return response()->json(ResponseHelper::failed('Server error!'));
+            }
+        });
+
+        $this->renderable(function (ThrottleRequestsException $e, $request) {
+            if($request->is('api/*')) {
+                return response()->json(ResponseHelper::failed('Too many requests.'));
+            }
         });
     }
 }
