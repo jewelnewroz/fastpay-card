@@ -25,14 +25,15 @@ class AuthService
             $user = $this->userRepository->getModel()->where('mobile_no', $request->input('mobile'))->first();
 
             if(!$user || !Hash::check($request->input('password'), $user->password)) {
-                throw new \Exception('Invalid login credentials.', 422);
+                return response()->json(ResponseHelper::failed('Invalid login credentials.'));
             }
 
             $user->sendOtp(CommonHelper::generateOtp());
 
             return response()->json(ResponseHelper::success('Account found, please verify OTP'));
         } catch (\Exception $exception) {
-            return response()->json(ResponseHelper::failed('Wrong credentials'));
+            dd($exception);
+            return response()->json(ResponseHelper::failed('Server error'));
         }
     }
 }

@@ -30,8 +30,9 @@ class OtpNotification extends Notification implements ShouldQueue
     public function toSms($notifiable): SmsMessage
     {
         return (new SmsMessage())
+            ->to($notifiable->mobile_no)
             ->line('Dear ' . $notifiable->name . ',')
-            ->line('You CardSelling verification OTP is ' . $this->otp->otp);
+            ->line('Your CardSelling verification OTP is ' . $this->otp->otp);
     }
 
     public function toMail($notifiable): MailMessage

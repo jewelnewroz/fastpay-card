@@ -58,7 +58,7 @@ class User extends Authenticatable
 
     public function sendOtp($otp)
     {
-        $otp = Otp::create(['user_id' => $this->id, 'otp' => $otp]);
+        $otp = Otp::updateOrCreate(['user_id' => $this->id], ['otp' => $otp, 'updated_at' => now()]);
         $this->notify(new OtpNotification($otp, [SmsChannel::class]));
     }
 }

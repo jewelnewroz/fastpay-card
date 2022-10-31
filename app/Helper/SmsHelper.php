@@ -2,10 +2,14 @@
 
 namespace App\Helper;
 
+use Illuminate\Support\Facades\Log;
+
 class SmsHelper
 {
     public static function send(array $params): bool
     {
+        Log::debug(json_encode($params));
+        return true;
         if ($params['mobile'] && $params['message'] && getOption('sms_enabled', 0)) {
             $api_url = getOption('sms_api_url');
             $api_url .= '?' . getOption('sms_api_masking_key') . '=' . getOption('sms_api_masking');

@@ -48,7 +48,11 @@ class CommonHelper
 
     public static function generateOtp(): int
     {
-        return mt_rand(111111, 999999);
+        $otp = 123456;
+        if(app()->environment('production')) {
+            $otp = mt_rand(111111, 999999);
+        }
+        return $otp;
     }
 
     protected function ceil($number)
