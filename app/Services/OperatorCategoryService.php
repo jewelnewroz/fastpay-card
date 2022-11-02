@@ -19,7 +19,7 @@ class OperatorCategoryService
     public function all()
     {
         return Cache::rememberForever('categories', function () {
-            return $this->operatorCategoryRepository->all();
+            return $this->operatorCategoryRepository->with('operators')->get();
         });
     }
 
