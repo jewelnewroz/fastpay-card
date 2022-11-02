@@ -19,4 +19,13 @@ class Operator extends Model
     {
         return config('common.operator.statuses')[$this->status];
     }
+
+    public function format(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'logo' => secure_asset($this->logo ?? 'default/operator.png')
+        ];
+    }
 }
