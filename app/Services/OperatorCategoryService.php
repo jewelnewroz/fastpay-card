@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\Interfaces\OperatorCategoryRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 class OperatorCategoryService

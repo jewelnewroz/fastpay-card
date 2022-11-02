@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\V1\ApiAuthController;
+use App\Http\Controllers\API\V1\ApiCategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'auth', 'middleware' => ['guest', 'throttle:30,1']], function() {
@@ -9,6 +10,10 @@ Route::group(['prefix' => 'auth', 'middleware' => ['guest', 'throttle:30,1']], f
 });
 
 Route::group(['middleware' => 'auth:api'], function() {
+    Route::group(['prefix' => 'category'], function() {
+        Route::get('/', [ApiCategoryController::class, 'index']);
+    });
+
     Route::group(['prefix' => 'user'], function () {
 
     });
