@@ -38,7 +38,7 @@ class Operator extends Model
             'logo' => secure_asset($this->logo ?? 'default/operator.png'),
             'bundles' => $this->bundles->where('status', AppConst::BUNDLE_ACTIVE)->where('offer_only', 0)->map(function($bundle, $key) {
                 return $bundle->format();
-            })
+            })->values()
         ];
     }
 }

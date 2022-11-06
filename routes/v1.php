@@ -19,11 +19,11 @@ Route::group(['middleware' => 'auth:api'], function() {
     });
 
     Route::group(['prefix' => 'operator'], function() {
-        Route::get('/{id}', [ApiOperatorController::class, 'show']);
+        Route::get('/{operator}', [ApiOperatorController::class, 'show']);
     });
 
     Route::group(['prefix' => 'bundle'], function() {
-        Route::get('/{id}', [ApiBundleController::class, 'show']);
+        Route::get('/{bundle}', [ApiBundleController::class, 'show']);
     });
 
     Route::group(['prefix' => 'purchase'], function() {

@@ -21,4 +21,13 @@ class Bundle extends Model
     {
         return config('common.bundle.statuses')[$this->status];
     }
+
+    public function format(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'logo' => secure_asset($this->logo ?? 'default/banner.png')
+        ];
+    }
 }
