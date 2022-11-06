@@ -54,7 +54,7 @@ class OperatorController extends Controller
 
     public function show(Operator $operator)
     {
-        return view('admin.operator.show', compact('operator'))->with(['title' => 'Show operator']);
+        return view('admin.operator.show', compact('operator'))->with(['title' => $operator->name]);
     }
 
     public function edit(Operator $operator)

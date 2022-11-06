@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Constant\AppConst;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Operator extends Model
@@ -14,6 +15,16 @@ class Operator extends Model
     public function bundles(): HasMany
     {
         return $this->hasMany(Bundle::class);
+    }
+
+    public function operatorCategory(): BelongsTo
+    {
+        return $this->belongsTo(OperatorCategory::class, 'category', 'name');
+    }
+
+    public function requestParams(): HasMany
+    {
+        return $this->hasMany(OperatorRequestParams::class);
     }
 
     public function getNiceStatusAttribute()
