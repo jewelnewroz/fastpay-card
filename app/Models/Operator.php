@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Constant\AppConst;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -26,6 +27,18 @@ class Operator extends Model
             'id' => $this->id,
             'name' => $this->name,
             'logo' => secure_asset($this->logo ?? 'default/operator.png')
+        ];
+    }
+
+    public function formatWithBundles(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'logo' => secure_asset($this->logo ?? 'default/operator.png'),
+            'bundles' => $this->bundles->where('status', AppConst::BUNDLE_ACTIVE)->where('offer_only', 0)->map(function($bundle, $key) {
+                return $bundle->format();
+            })
         ];
     }
 }

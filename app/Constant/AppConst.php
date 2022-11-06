@@ -7,4 +7,5 @@ class AppConst
     const STRONG_PASSWORD_PATTERN = '^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$^';
     const CATEGORY_ACTIVE = 1;
     const OPERATOR_ACTIVE = 1;
+    const BUNDLE_ACTIVE = 1;
 }
