@@ -30,4 +30,14 @@ class Bundle extends Model
             'logo' => secure_asset($this->logo ?? 'default/banner.png')
         ];
     }
+
+    public function formatEverything(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'logo' => secure_asset($this->logo ?? 'default/banner.png'),
+            'request_params' => $this->operator->requestParams ?? null
+        ];
+    }
 }

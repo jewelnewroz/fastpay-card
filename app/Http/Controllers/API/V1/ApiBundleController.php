@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use App\Helper\ResponseHelper;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Bundle;
+use Illuminate\Http\JsonResponse;
 
 class ApiBundleController extends Controller
 {
-    public function __construct()
+    public function show(Bundle $bundle): JsonResponse
     {
-
+        return response()->json(ResponseHelper::success('Success', $bundle->formatEverything()));
     }
 }
