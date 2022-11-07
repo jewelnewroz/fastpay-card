@@ -108,6 +108,20 @@
     margin-left: 15px;
     margin-bottom: 0;
 }
+.sidebar-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+}
+#customize-menu {
+    padding: 0;
+    margin-bottom: 0;
+}
+#customize-menu li a {
+    font-size: 18px;
+    font-weight: bold;
+}
 @media (min-width: 992px){
     .search-sec{
         position: relative;

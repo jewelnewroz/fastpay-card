@@ -108,10 +108,14 @@
                 "columns": [
                     {
                         "mRender": function (data, type, row) {
-                            return '<img class="table-avatar" src="' + row['logo'] + '">';
+                            return '<a href="/dashboard/operator/' + row['id'] + '"><img class="table-avatar" src="' + row['logo'] + '"></a>';
                         }
                     },
-                    {"data": "name"},
+                    {
+                        "mRender": function (data, type, row) {
+                            return '<a href="/dashboard/operator/' + row['id'] + '">' + row['name'] + '</a>';
+                        }
+                    },
                     {"data": "gateway"},
                     {"data": "category"},
                     {"data": "position"},
@@ -143,9 +147,7 @@
             //Custom Filters
             $('input').keyup(function (event) {
                 let keycode = (event.keyCode ? event.keyCode : event.which);
-                // if(keycode == '13'){
                 table.draw();
-                // }
             });
 
             //Custom Filters
