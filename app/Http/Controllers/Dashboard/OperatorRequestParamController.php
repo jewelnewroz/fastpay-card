@@ -7,6 +7,7 @@ use App\Http\Requests\OperatorParamCreateRequest;
 use App\Models\Operator;
 use App\Models\OperatorRequestParams;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 
 class OperatorRequestParamController extends Controller
 {
@@ -26,8 +27,15 @@ class OperatorRequestParamController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function destroy(OperatorRequestParams $param): RedirectResponse
     {
-        //
+        try {
+            if($param->delete()) {
+            }
+        } catch (\Exception $exception) {
+            Log::error($exception);
+        }
+
+        return redirect()->back();
     }
 }

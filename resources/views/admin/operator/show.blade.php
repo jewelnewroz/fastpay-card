@@ -47,15 +47,35 @@
                 <div class="btn-group float-right mb-3">
                     <a href="{{ route('operator.param.create', $operator->id) }}" class="btn btn-success"><i class="fa fa-plus"></i> Add new request param</a>
                 </div>
-                <table class="table">
+                <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
                         <th>Field name</th>
+                        <th>Field type</th>
                         <th>Field Label</th>
                         <th>Placeholder</th>
+                        <th>Is Required?</th>
                         <th>Action</th>
                     </tr>
                     </thead>
+                    <tbody>
+                    @foreach($operator->requestParams as $param)
+                    <tr>
+                        <td>{{ $param->name }}</td>
+                        <td>{{ $param->type }}</td>
+                        <td>{{ $param->label }}</td>
+                        <td>{{ $param->placeholder }}</td>
+                        <td>{{ $param->is_required ? 'Yes' : 'No' }}</td>
+                        <td>
+                            <form action="{{ route('operator.param.delete', $param->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger"><i class="fa fa-times"></i> Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>

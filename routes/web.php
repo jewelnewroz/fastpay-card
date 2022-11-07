@@ -32,6 +32,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function() {
         Route::resource('category', OperatorCategoryController::class)->except(['destroy']);
         Route::get('request-param/{operator}', [OperatorRequestParamController::class, 'create'])->name('operator.param.create');
         Route::post('request-param/store', [OperatorRequestParamController::class, 'store'])->name('operator.param.store');
+        Route::delete('request-param/{param}', [OperatorRequestParamController::class, 'destroy'])->name('operator.param.delete');
     });
     Route::resource('operator', OperatorController::class);
     Route::resource('bundle', BundleController::class);
