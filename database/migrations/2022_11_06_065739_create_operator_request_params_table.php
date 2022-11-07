@@ -12,6 +12,7 @@ class CreateOperatorRequestParamsTable extends Migration
             $table->id();
             $table->bigInteger('operator_id');
             $table->string('name');
+            $table->string('type')->default('text');
             $table->string('label');
             $table->string('placeholder')->nullable();
             $table->tinyInteger('is_required')->default(true);

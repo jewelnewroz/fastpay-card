@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboard\BundleController;
 use App\Http\Controllers\Dashboard\OperatorCategoryController;
 use App\Http\Controllers\Dashboard\OperatorController;
+use App\Http\Controllers\Dashboard\OperatorRequestParamController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\OptionController;
@@ -29,6 +30,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function() {
 
     Route::group(['prefix' => 'operator'], function(){
         Route::resource('category', OperatorCategoryController::class)->except(['destroy']);
+        Route::get('request-param/{operator}', [OperatorRequestParamController::class, 'create'])->name('operator.param.create');
+        Route::post('request-param/store', [OperatorRequestParamController::class, 'store'])->name('operator.param.store');
     });
     Route::resource('operator', OperatorController::class);
     Route::resource('bundle', BundleController::class);

@@ -9,16 +9,16 @@
     <section class="content">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                <a class="nav-link @if(in_array(request()->input('tab'), ['', 'info'] )) active @endif" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
                    aria-selected="true">Info</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#requestParams" role="tab"
+                <a class="nav-link @if(request()->input('tab') == 'param') active @endif" id="profile-tab" data-toggle="tab" href="#requestParams" role="tab"
                    aria-controls="requestParams" aria-selected="false">Request params</a>
             </li>
         </ul>
         <div class="tab-content p-3 bg-white" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="tab-pane @if(in_array(request()->input('tab'), ['', 'info'] )) fade show active @endif" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <table class="table table-striped">
                     <tr>
                         <th>Name</th>
@@ -43,9 +43,9 @@
                 </table>
             </div>
 
-            <div class="tab-pane" id="requestParams" role="tabpanel" aria-labelledby="requestParams-tab">
+            <div class="tab-pane @if(request()->input('tab') == 'param') fade show active @endif" id="requestParams" role="tabpanel" aria-labelledby="requestParams-tab">
                 <div class="btn-group float-right mb-3">
-                    <a href="#" class="btn btn-success"><i class="fa fa-plus"></i> Add new request param</a>
+                    <a href="{{ route('operator.param.create', $operator->id) }}" class="btn btn-success"><i class="fa fa-plus"></i> Add new request param</a>
                 </div>
                 <table class="table">
                     <thead>
