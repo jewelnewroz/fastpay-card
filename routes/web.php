@@ -34,6 +34,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function() {
         Route::post('request-param/store', [OperatorRequestParamController::class, 'store'])->name('operator.param.store');
         Route::delete('request-param/{param}', [OperatorRequestParamController::class, 'destroy'])->name('operator.param.delete');
     });
+
     Route::resource('operator', OperatorController::class);
     Route::resource('bundle', BundleController::class);
     Route::resource('transaction', TransactionController::class)->only('index');

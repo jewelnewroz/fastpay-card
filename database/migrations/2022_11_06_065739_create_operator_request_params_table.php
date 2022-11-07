@@ -17,6 +17,7 @@ class CreateOperatorRequestParamsTable extends Migration
             $table->string('placeholder')->nullable();
             $table->tinyInteger('is_required')->default(true);
             $table->timestamps();
+            $table->softDeletesTz();
         });
     }
 
