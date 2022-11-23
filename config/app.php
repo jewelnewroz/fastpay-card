@@ -178,7 +178,8 @@ return [
         App\Providers\BladeServiceProvider::class,
         App\Providers\ViewServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
-        App\Providers\HeaderServiceProvider::class
+        App\Providers\HeaderServiceProvider::class,
+        App\Providers\GatewayServiceProvider::class
     ],
 
     /*

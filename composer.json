@@ -17,7 +17,8 @@
         "laravel/tinker": "^2.5",
         "predis/predis": "^2.0",
         "spatie/laravel-permission": "^5.5",
-        "yajra/laravel-datatables": "^1.5"
+        "yajra/laravel-datatables": "^1.5",
+      "ext-openssl": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

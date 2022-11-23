@@ -6,14 +6,11 @@ use App\Gateways\GatewayInterface;
 use App\Helper\ResponseHelper;
 use App\Http\Requests\BundlePurchaseExecuteRequest;
 use App\Http\Requests\BundleValidationRequest;
-use App\Http\Traits\JsonResponseTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 
 class BundlePurchaseService
 {
-    use JsonResponseTrait;
-
     private GatewayInterface $gateway;
 
     public function __construct(GatewayInterface $gateway)

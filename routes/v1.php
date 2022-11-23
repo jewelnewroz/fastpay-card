@@ -27,7 +27,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     });
 
     Route::group(['prefix' => 'purchase'], function() {
-        Route::post('/validate', [ApiBundlePurchaseController::class, 'validate']);
+        Route::post('/validate', [ApiBundlePurchaseController::class, 'validation']);
         Route::post('/execute', [ApiBundlePurchaseController::class, 'execute']);
     });
 
