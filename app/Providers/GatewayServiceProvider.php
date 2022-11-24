@@ -20,7 +20,7 @@ class GatewayServiceProvider extends ServiceProvider
         }
         $bundle = Bundle::with('operator')->where(['status' => 1, 'id' => request()->input('bundle_id')])->first();
 
-        $this->app->bind(GatewayInterface::class, $this->getClassName($bundle->operator->via ?? 'NotExist'));
+        $this->app->bind(GatewayInterface::class, $this->getClassName($bundle->operator->gateway ?? 'NotExist'));
     }
 
     private function getClassName($classname): string

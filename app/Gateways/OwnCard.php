@@ -3,27 +3,29 @@
 namespace App\Gateways;
 
 use App\Constants\AppConstant;
+use App\Helper\ResponseHelper;
 use App\Http\Requests\BundlePurchaseExecuteRequest;
 use App\Http\Requests\BundleValidationRequest;
-use App\Http\Traits\JsonResponseTrait;
 use App\Jobs\BundlePurchaseIpnJob;
 use App\Models\Bundle;
 use App\Models\Card;
 use App\Models\ThirdPartyApiLog;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class OwnCard implements GatewayInterface
 {
-    use JsonResponseTrait;
-
     public function validate(BundleValidationRequest $request): array
     {
-        $count = Card::where('status', 0)->where('bundle_id', $request->bundle_id)->count();
-        $data['status'] = $count > 0;
-        $data['message'] = $count > 0 ? __('Success') : __('You are not eligible to this bundle');
-        return $data;
+        try {
+            $count = Card::where('status', 0)->where('bundle_id', $request->input('bundle_id'))->count();
+            if($count <= 2) {
+                throw new \Exception('Stock not available', 404);
+            }
+            return request()->json(ResponseHelper::success());
+        } catch (\Exception $exception) {
+            return request()->json(ResponseHelper::failed('Stock not available'));
+        }
     }
 
     public function execute(BundlePurchaseExecuteRequest $request): bool
